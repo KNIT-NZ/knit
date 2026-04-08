@@ -1,0 +1,47 @@
+import fs from "fs";
+import path from "path";
+import matter from "gray-matter";
+import { manifest } from "@/content/manifest";
+import { ManifestItem, SectionData } from "@/lib/types";
+
+const sectionsDirectory = path.join(process.cwd(), "content", "sections");
+
+export function getAllManifestItems(): ManifestItem[] {
+  return [...manifest].sort((a, b) => a.order - b.order);
+}
+
+export function getSectionSlugs(): string[] {
+  return getAllManifestItems().map((item) => item.slug);
+}
+
+export function getSectionBySlug(slug: string): SectionData | null {
+  const filePath = path.join(sectionsDirectory, `${slug}.mdx`);
+
+  if (!fs.existsSync(filePath)) return null;
+
+  const fileContents = fs.readFileSync(filePath, "utf8");
+  const { data, content } = matter(fileContents);
+
+  const manifestItem = manifest.find((item) => item.slug === slug);
+
+  if (!manifestItem) return null;
+
+  return {
+    slug,
+    title: data.title ?? manifestItem.title,
+    part: data.part ?? manifestItem.part,
+    description: data.description ?? manifestItem.description,
+    order: data.order ?? manifestItem.order,
+    content,
+  };
+}
+
+export function getAdjacentSections(slug: string) {
+  const items = getAllManifestItems();
+  const index = items.findIndex((item) => item.slug === slug);
+
+  return {
+    prev: index > 0 ? items[index - 1] : null,
+    next: index < items.length - 1 ? items[index + 1] : null,
+  };
+}
