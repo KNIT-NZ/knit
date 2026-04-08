@@ -1,12 +1,13 @@
 :root {
-  --bg: #f7f5f0;
+  --bg: #f5f3ef;
   --paper: #fbfaf7;
-  --text: #151515;
-  --muted: #6a6a66;
-  --line: rgba(21, 21, 21, 0.12);
+  --text: #161616;
+  --muted: #666962;
+  --line: rgba(22, 22, 22, 0.13);
+  --line-strong: rgba(22, 22, 22, 0.2);
   --accent: #111111;
-  --max-width: 760px;
-  --sidebar-width: 280px;
+  --max-reading-width: 820px;
+  --home-max-width: 1320px;
   --sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI",
     sans-serif;
   --serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino,
@@ -35,205 +36,344 @@ a {
   text-decoration: none;
 }
 
-.progressBarWrap {
-  position: fixed;
-  inset: 0 0 auto 0;
-  height: 2px;
-  background: transparent;
-  z-index: 100;
+button {
+  font: inherit;
 }
 
-.progressBar {
-  height: 100%;
-  background: var(--accent);
+.topBar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(245, 243, 239, 0.94);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+
+.topBarInner {
+  max-width: 1680px;
+  margin: 0 auto;
+  min-height: 78px;
+  display: grid;
+  grid-template-columns: 1fr minmax(340px, 760px) 1fr;
+  align-items: center;
+  gap: 20px;
+  padding: 0 20px;
+}
+
+.topBarLeft {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 0;
+}
+
+.topBarCenter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+.topBarRight {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brandMark {
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--accent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1;
+}
+
+.brandText {
+  font-size: 28px;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+}
+
+.topBarLabel {
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.2;
+  font-weight: 600;
+  color: rgba(22, 22, 22, 0.78);
+  margin-bottom: 10px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.progressMeter {
+  width: 100%;
+  height: 6px;
+  display: flex;
+  align-items: center;
+  background: transparent;
+}
+
+.progressMeter::before {
+  content: "";
+  position: absolute;
+}
+
+.progressMeterFill {
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(22, 22, 22, 0.26);
   transition: width 0.08s linear;
 }
 
-.homePage {
-  max-width: 1120px;
+.menuButton {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: rgba(255, 255, 255, 0.35);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text);
+}
+
+.menuButton:hover {
+  background: rgba(255, 255, 255, 0.65);
+}
+
+.homeShell {
+  max-width: var(--home-max-width);
   margin: 0 auto;
-  padding: 72px 32px 96px;
+  padding: 36px 28px 96px;
+  display: grid;
+  grid-template-columns: 360px minmax(0, 1fr);
+  gap: 72px;
 }
 
-.hero {
-  max-width: 840px;
-  margin-bottom: 72px;
+.homeSidebar {
+  position: sticky;
+  top: 106px;
+  align-self: start;
 }
 
-.eyebrow,
+.homeSidebarCard {
+  margin-bottom: 32px;
+}
+
+.homeSidebarEyebrow,
 .sectionLabel,
-.sidebarLabel,
-.sectionEyebrow {
+.tocOverlayPart {
   font-family: var(--sans);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-size: 12px;
   color: var(--muted);
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 
-.hero h1 {
-  margin: 0;
-  font-size: clamp(46px, 7vw, 84px);
-  line-height: 0.96;
-  letter-spacing: -0.04em;
+.homeTitle {
+  margin: 0 0 16px;
+  font-size: 42px;
+  line-height: 1.02;
+  letter-spacing: -0.045em;
   font-weight: 500;
-  max-width: 980px;
 }
 
-.heroText {
-  margin-top: 26px;
-  max-width: 720px;
-  font-size: 22px;
-  line-height: 1.55;
-  color: rgba(21, 21, 21, 0.82);
+.homeIntro {
+  margin: 0;
+  font-size: 19px;
+  line-height: 1.65;
+  color: rgba(22, 22, 22, 0.78);
 }
 
-.heroActions {
-  display: flex;
-  gap: 20px;
-  align-items: center;
-  margin-top: 32px;
-  margin-bottom: 36px;
-  font-family: var(--sans);
-}
-
-.primaryLink,
-.secondaryLink,
-.navPrev,
-.navNext {
-  font-size: 15px;
-  border-bottom: 1px solid var(--text);
-  padding-bottom: 2px;
-}
-
-.contentsSection {
-  border-top: 1px solid var(--line);
-  padding-top: 28px;
-}
-
-.contentsList {
+.projectRail {
   display: grid;
-  gap: 0;
+  gap: 12px;
 }
 
-.contentsRow {
-  display: grid;
-  grid-template-columns: 180px 1fr;
-  gap: 24px;
-  padding: 18px 0;
-  border-bottom: 1px solid var(--line);
-}
-
-.contentsMeta {
-  font-family: var(--sans);
-  font-size: 13px;
-  color: var(--muted);
-}
-
-.contentsTitle {
-  font-size: 28px;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-}
-
-.contentsDescription {
-  margin-top: 8px;
-  font-size: 16px;
-  line-height: 1.55;
-  color: var(--muted);
-  font-family: var(--sans);
-}
-
-.readingPage {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 32px 32px 120px;
-  display: grid;
-  grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
-  gap: 56px;
-}
-
-.sidebarToc {
+.projectRailItem {
   position: relative;
-}
-
-.sidebarTocInner {
-  position: sticky;
-  top: 32px;
-  padding-top: 24px;
-}
-
-.tocItem {
   display: block;
-  padding: 10px 0 12px;
-  border-bottom: 1px solid var(--line);
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  padding: 16px 18px;
+  background: rgba(255, 255, 255, 0.28);
 }
 
-.tocPart {
-  display: block;
+.projectRailMain {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
   font-family: var(--sans);
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--muted);
-  margin-bottom: 6px;
-}
-
-.tocTitle {
-  display: block;
-  font-family: var(--sans);
-  font-size: 15px;
-  line-height: 1.35;
-}
-
-.tocItem.active .tocTitle {
-  color: var(--text);
+  font-size: 16px;
   font-weight: 600;
 }
 
-.readingArticle {
-  max-width: 860px;
+.projectRailTitle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.projectRailNote {
+  margin-top: 6px;
+  font-family: var(--sans);
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.projectBadge {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: #1f6fff;
+  color: white;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.homeMain {
   min-width: 0;
 }
 
+.homeSectionHeader {
+  padding-top: 8px;
+  margin-bottom: 26px;
+}
+
+.homeDescription {
+  max-width: 760px;
+  font-family: var(--sans);
+  font-size: 18px;
+  line-height: 1.6;
+  color: rgba(22, 22, 22, 0.72);
+}
+
+.tocGroups {
+  display: grid;
+  gap: 28px;
+}
+
+.tocGroupHeader h2 {
+  margin: 0 0 14px;
+  font-size: 28px;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  font-weight: 600;
+}
+
+.tocGroupList {
+  border-top: 1px solid var(--line-strong);
+}
+
+.tocRow {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr);
+  gap: 18px;
+  align-items: center;
+  min-height: 78px;
+  border-bottom: 1px solid var(--line-strong);
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.tocRowIcon {
+  width: 36px;
+  height: 36px;
+  margin-left: 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(22, 22, 22, 0.8);
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.tocRowBody {
+  padding: 14px 18px 14px 0;
+  min-width: 0;
+}
+
+.tocRowTitle {
+  font-family: var(--sans);
+  font-size: 18px;
+  line-height: 1.3;
+}
+
+.tocRowDescription {
+  margin-top: 4px;
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.readingShell {
+  padding: 36px 20px 120px;
+}
+
+.readingArticleCentered {
+  max-width: var(--max-reading-width);
+  margin: 0 auto;
+}
+
 .readingHeader {
-  padding-top: 20px;
   margin-bottom: 40px;
+  text-align: left;
 }
 
 .readingHeader h1 {
   margin: 0;
-  font-size: clamp(44px, 6vw, 76px);
+  font-size: clamp(56px, 7vw, 76px);
   line-height: 0.98;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.05em;
   font-weight: 500;
 }
 
 .sectionDescription {
   margin-top: 18px;
-  max-width: 700px;
+  max-width: 720px;
   font-size: 22px;
-  line-height: 1.5;
-  color: rgba(21, 21, 21, 0.78);
+  line-height: 1.55;
+  color: rgba(22, 22, 22, 0.76);
 }
 
 .proseShell {
-  max-width: var(--max-width);
+  max-width: var(--max-reading-width);
 }
 
 .proseShell p,
 .proseShell li,
 .proseShell blockquote {
-  font-size: 22px;
-  line-height: 1.78;
+  font-size: 24px;
+  line-height: 1.72;
   margin: 0 0 1.15em;
 }
 
 .proseShell h2 {
-  margin-top: 2.8em;
+  margin-top: 2.6em;
   margin-bottom: 0.7em;
-  font-size: 36px;
+  font-size: 40px;
   line-height: 1.08;
   letter-spacing: -0.03em;
 }
@@ -241,7 +381,7 @@ a {
 .proseShell h3 {
   margin-top: 2.2em;
   margin-bottom: 0.65em;
-  font-size: 28px;
+  font-size: 30px;
   line-height: 1.15;
   letter-spacing: -0.02em;
 }
@@ -255,13 +395,13 @@ a {
 .proseShell blockquote {
   padding-left: 20px;
   border-left: 2px solid var(--line);
-  color: rgba(21, 21, 21, 0.7);
+  color: rgba(22, 22, 22, 0.72);
 }
 
 .proseShell code {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 0.92em;
-  background: rgba(21, 21, 21, 0.06);
+  background: rgba(22, 22, 22, 0.06);
   padding: 0.1em 0.25em;
   border-radius: 4px;
 }
@@ -274,6 +414,13 @@ a {
   padding-top: 24px;
   border-top: 1px solid var(--line);
   font-family: var(--sans);
+}
+
+.navPrev,
+.navNext {
+  font-size: 15px;
+  border-bottom: 1px solid var(--text);
+  padding-bottom: 2px;
 }
 
 .footnoteRef {
@@ -311,106 +458,199 @@ a {
   color: var(--muted);
 }
 
-.searchBox {
-  width: 100%;
-  max-width: 560px;
+.tocOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.18s ease;
 }
 
-.searchInput {
-  width: 100%;
-  border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.55);
-  padding: 14px 16px;
-  font-size: 16px;
+.tocOverlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.tocOverlayBackdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(22, 22, 22, 0.22);
+}
+
+.tocOverlayPanel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(720px, 100vw);
+  height: 100%;
+  background: var(--paper);
+  border-left: 1px solid var(--line);
+  transform: translateX(100%);
+  transition: transform 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.tocOverlay.open .tocOverlayPanel {
+  transform: translateX(0);
+}
+
+.tocOverlayHeader {
+  min-height: 78px;
+  padding: 0 20px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tocOverlayTitle {
   font-family: var(--sans);
-  outline: none;
-  border-radius: 0;
+  font-size: 16px;
+  font-weight: 700;
 }
 
-.searchInput:focus {
-  border-color: rgba(21, 21, 21, 0.35);
+.tocOverlayBody {
+  overflow-y: auto;
+  padding: 22px 20px 40px;
 }
 
-.searchResults {
-  margin-top: 14px;
+.tocOverlaySection + .tocOverlaySection {
+  margin-top: 26px;
+}
+
+.tocOverlayList {
   border-top: 1px solid var(--line);
 }
 
-.searchResult,
-.searchEmpty {
+.tocOverlayItem {
   display: block;
   padding: 14px 0;
   border-bottom: 1px solid var(--line);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.4;
 }
 
-.searchResultTitle {
+.tocOverlayItem.active {
+  font-weight: 700;
+}
+
+.standardPage {
+  padding: 48px 20px 100px;
+}
+
+.standardPageInner {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.standardPageInner h1 {
+  margin: 0 0 16px;
+  font-size: 54px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-weight: 500;
+}
+
+.standardLead {
+  max-width: 760px;
+  font-size: 22px;
+  line-height: 1.6;
+  color: rgba(22, 22, 22, 0.76);
+}
+
+.projectPageList {
+  display: grid;
+  gap: 18px;
+  margin-top: 36px;
+}
+
+.projectPageCard {
+  display: block;
+  padding: 24px;
+  border: 1px solid var(--line-strong);
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.projectPageCard h2 {
+  margin: 0 0 10px;
+  font-size: 28px;
+  line-height: 1.1;
+}
+
+.projectPageCard p {
+  margin: 0;
   font-family: var(--sans);
   font-size: 16px;
-  margin-bottom: 4px;
-}
-
-.searchResultDescription {
-  font-family: var(--sans);
-  font-size: 14px;
-  line-height: 1.45;
+  line-height: 1.55;
   color: var(--muted);
 }
 
-.searchPage,
-.projects {
-  max-width: 980px;
-  margin: 0 auto;
-  padding: 72px 32px 120px;
-}
-
-.searchPageInner {
-  max-width: 680px;
-}
-
-@media (max-width: 980px) {
-  .readingPage {
+@media (max-width: 1100px) {
+  .homeShell {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 36px;
   }
 
-  .sidebarToc {
+  .homeSidebar {
+    position: static;
+  }
+}
+
+@media (max-width: 820px) {
+  .topBarInner {
+    grid-template-columns: 1fr auto;
+    gap: 16px;
+  }
+
+  .topBarCenter {
     display: none;
   }
 
-  .contentsRow {
-    grid-template-columns: 1fr;
-    gap: 8px;
+  .brandText {
+    font-size: 24px;
+  }
+
+  .readingHeader h1 {
+    font-size: clamp(44px, 12vw, 60px);
+  }
+
+  .sectionDescription {
+    font-size: 20px;
   }
 
   .proseShell p,
   .proseShell li,
   .proseShell blockquote {
-    font-size: 20px;
-    line-height: 1.72;
+    font-size: 21px;
+    line-height: 1.68;
   }
 
-  .sectionDescription,
-  .heroText {
-    font-size: 20px;
+  .tocRow {
+    grid-template-columns: 44px minmax(0, 1fr);
   }
 }
 
 @media (max-width: 640px) {
-  .homePage,
-  .readingPage,
-  .searchPage,
-  .projects {
-    padding-left: 20px;
-    padding-right: 20px;
+  .homeShell,
+  .readingShell,
+  .standardPage {
+    padding-left: 16px;
+    padding-right: 16px;
   }
 
-  .heroActions {
-    flex-direction: column;
-    align-items: flex-start;
+  .homeTitle {
+    font-size: 36px;
   }
 
   .readingFooter {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .tocOverlayPanel {
+    width: 100vw;
   }
 }

@@ -25,8 +25,8 @@ export default function ProgressBar() {
   }, []);
 
   return (
-    <div className="progressBarWrap" aria-hidden="true">
-      <div className="progressBar" style={{ width: `${progress}%` }} />
+    <div className="progressMeter" aria-hidden="true">
+      <div className="progressMeterFill" style={{ width: `${progress}%` }} />
     </div>
   );
 }

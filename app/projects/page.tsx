@@ -1,19 +1,41 @@
-export default function Projects() {
+import TopBar from "@/components/TopBar";
+
+export default function ProjectsPage() {
   return (
-    <main className="projects">
-      <h1>Projects</h1>
+    <>
+      <TopBar centerLabel="Projects" />
 
-      <div className="project">
-        <h2>Open Order</h2>
-        <p>Real-time participatory policy system</p>
-        <a href="https://open-order.knit.nz">Visit</a>
-      </div>
+      <main className="standardPage">
+        <div className="standardPageInner">
+          <div className="sectionLabel">Projects</div>
+          <h1>Live institutions and experiments.</h1>
+          <p className="standardLead">
+            The main domain explains the doctrine. The subdomains test it in public.
+          </p>
 
-      <div className="project">
-        <h2>Swive</h2>
-        <p>Psychometric civic engagement engine</p>
-        <a href="https://swive.knit.nz">Visit</a>
-      </div>
-    </main>
+          <div className="projectPageList">
+            <a
+              href="https://openorder.knit.nz"
+              target="_blank"
+              rel="noreferrer"
+              className="projectPageCard"
+            >
+              <h2>Open Order</h2>
+              <p>Real-time participatory policy system.</p>
+            </a>
+
+            <a
+              href="https://swive.knit.nz"
+              target="_blank"
+              rel="noreferrer"
+              className="projectPageCard"
+            >
+              <h2>Swive</h2>
+              <p>Psychometric civic engagement engine.</p>
+            </a>
+          </div>
+        </div>
+      </main>
+    </>
   );
 }

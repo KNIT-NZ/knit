@@ -4,7 +4,7 @@ export const manifest: ManifestItem[] = [
   {
     slug: "preamble",
     title: "Preamble",
-    part: "Foundations",
+    part: "Quickstart",
     description: "Why democracy now feels too slow for the world it governs.",
     order: 1,
   },

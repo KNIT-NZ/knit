@@ -1,5 +1,4 @@
 import "./globals.css";
-import ProgressBar from "@/components/ProgressBar";
 
 export const metadata = {
   title: "KNIT",
@@ -13,10 +12,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-        <ProgressBar />
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

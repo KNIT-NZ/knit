@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import SidebarToc from "@/components/SidebarToc";
+import TopBar from "@/components/TopBar";
+import TocOverlay from "@/components/TocOverlay";
 import { getAdjacentSections, getSectionBySlug, getSectionSlugs } from "@/lib/content";
 
 export function generateStaticParams() {
@@ -21,39 +22,43 @@ export default async function ReadPage({
   const MDXContent = (await import(`@/content/sections/${slug}.mdx`)).default;
 
   return (
-    <main className="readingPage">
-      <SidebarToc currentSlug={slug} />
+    <>
+      <TopBar
+        centerLabel={section.part || section.title}
+        rightSlot={<TocOverlay currentSlug={slug} />}
+      />
 
-      <article className="readingArticle">
-        <header className="readingHeader">
-          {section.part && <div className="sectionEyebrow">{section.part}</div>}
-          <h1>{section.title}</h1>
-          {section.description && (
-            <p className="sectionDescription">{section.description}</p>
-          )}
-        </header>
+      <main className="readingShell">
+        <article className="readingArticle readingArticleCentered">
+          <header className="readingHeader">
+            <h1>{section.title}</h1>
+            {section.description ? (
+              <p className="sectionDescription">{section.description}</p>
+            ) : null}
+          </header>
 
-        <div className="proseShell">
-          <MDXContent />
-        </div>
-
-        <footer className="readingFooter">
-          <div>
-            {prev && (
-              <Link href={`/read/${prev.slug}`} className="navPrev">
-                ← {prev.title}
-              </Link>
-            )}
+          <div className="proseShell">
+            <MDXContent />
           </div>
-          <div>
-            {next && (
-              <Link href={`/read/${next.slug}`} className="navNext">
-                {next.title} →
-              </Link>
-            )}
-          </div>
-        </footer>
-      </article>
-    </main>
+
+          <footer className="readingFooter">
+            <div>
+              {prev ? (
+                <Link href={`/read/${prev.slug}`} className="navPrev">
+                  ← {prev.title}
+                </Link>
+              ) : null}
+            </div>
+            <div>
+              {next ? (
+                <Link href={`/read/${next.slug}`} className="navNext">
+                  {next.title} →
+                </Link>
+              ) : null}
+            </div>
+          </footer>
+        </article>
+      </main>
+    </>
   );
 }
