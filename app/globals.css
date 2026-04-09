@@ -93,7 +93,7 @@ button {
 
 .topBarTopLabel {
   font-family: var(--sans);
-  font-size: 13px;
+  font-size: 12px;
   line-height: 1.1;
   font-weight: 700;
   margin-bottom: 4px;
@@ -103,7 +103,7 @@ button {
 
 .topBarBottomLabel {
   font-family: var(--sans);
-  font-size: 16px;
+  font-size: 12px;
   line-height: 1.15;
   font-weight: 600;
   color: rgba(22, 22, 22, 0.72);
@@ -187,15 +187,15 @@ button {
 
 .homeTitle {
   margin: 0 0 16px;
-  font-size: 36px;
-  line-height: 1.03;
+  font-size: 32px;
+  line-height: 1.04;
   letter-spacing: -0.04em;
   font-weight: 500;
 }
 
 .homeIntro {
   margin: 0;
-  font-size: 17px;
+  font-size: 14px;
   line-height: 1.58;
   color: rgba(22, 22, 22, 0.78);
 }

@@ -10,9 +10,9 @@ export default function ProjectsPage() {
       <main className="standardPage">
         <div className="standardPageInner">
           <div className="sectionLabel">Projects</div>
-          <h1>Live institutions and experiments.</h1>
+          <h1>Live experiments.</h1>
           <p className="standardLead">
-            The main domain explains the doctrine. The subdomains test it in public.
+            Our projects are testing our ideas in public.
           </p>
 
           <div className="projectPageList">

@@ -46,7 +46,6 @@ export default function HomePage() {
       <main className="homeShell">
         <aside className="homeSidebar">
           <div className="homeSidebarCard">
-            <div className="homeSidebarEyebrow">KNIT</div>
             <h1 className="homeTitle">
               Towards a digital-first New Zealand Government.
             </h1>
@@ -84,9 +83,8 @@ export default function HomePage() {
 
         <section className="homeMain">
           <div className="homeSectionHeader">
-            <div className="sectionLabel">Contents</div>
             <div className="homeDescription">
-              Read our plan for re-tooling democracy section by section.
+              Read our plan for re-tooling the legislature section by section.
             </div>
           </div>
 
