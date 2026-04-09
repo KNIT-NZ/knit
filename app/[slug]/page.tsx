@@ -38,9 +38,6 @@ export default async function SectionPage({
         <article className="readingArticleCentered">
           <header className="readingHeader">
             <h1>{section.title}</h1>
-            {section.description ? (
-              <p className="sectionDescription">{section.description}</p>
-            ) : null}
           </header>
 
           <div className="proseShell">

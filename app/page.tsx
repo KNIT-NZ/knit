@@ -2,29 +2,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import TopBar from "@/components/TopBar";
 import { manifest } from "@/content/manifest";
-
-const projectLinks = [
-  {
-    title: "Open Order",
-    href: "https://open-order.knit.nz",
-    enabled: true,
-  },
-  {
-    title: "TBD",
-    href: "https://tbd.knit.nz",
-    enabled: false,
-  },
-  {
-    title: "Projects",
-    href: "/projects",
-    enabled: true,
-  },
-  {
-    title: "Archive",
-    href: "/archive",
-    enabled: false,
-  },
-];
+import { projectLinks } from "@/content/projects";
 
 export default function HomePage() {
   const grouped = groupManifest();
@@ -36,12 +14,9 @@ export default function HomePage() {
       <main className="homeShell">
         <aside className="homeSidebar">
           <div className="homeSidebarCard">
-            <div className="homeSidebarEyebrow">KNIT</div>
             <h1 className="homeTitle">Towards a digital-first New Zealand Government.</h1>
             <p className="homeIntro">
-              KNIT is the narrative and constitutional layer of a broader ecosystem:
-              a place to explain the democratic vision, legitimise the work, and route
-              readers into the institutions being built on the subdomains.
+              We are aiming at healthy and reasoned civic discourse through tools built for the digital age.
             </p>
           </div>
 
@@ -52,8 +27,8 @@ export default function HomePage() {
                   key={item.title}
                   href={item.href}
                   className="projectRailItem"
-                  target={item.href.startsWith("http") ? "_blank" : undefined}
-                  rel={item.href.startsWith("http") ? "noreferrer" : undefined}
+                  target={item.external ? "_blank" : undefined}
+                  rel={item.external ? "noreferrer" : undefined}
                 >
                   <span className="projectRailLabel">{item.title}</span>
                   <ArrowUpRight size={15} />
@@ -75,7 +50,8 @@ export default function HomePage() {
           <div className="homeSectionHeader">
             <div className="sectionLabel">Contents</div>
             <div className="homeDescription">
-              Read our plan for re-tooling democracy section by section.
+              Read the living text section by section. Each page has its own canonical URL
+              and sits within a larger sequence.
             </div>
           </div>
 

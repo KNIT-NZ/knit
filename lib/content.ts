@@ -30,7 +30,6 @@ export function getSectionBySlug(slug: string): SectionData | null {
     slug,
     title: data.title ?? manifestItem.title,
     part: data.part ?? manifestItem.part,
-    description: data.description ?? manifestItem.description,
     order: data.order ?? manifestItem.order,
     content,
   };

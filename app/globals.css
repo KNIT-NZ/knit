@@ -6,7 +6,7 @@
   --line: rgba(22, 22, 22, 0.13);
   --line-strong: rgba(22, 22, 22, 0.2);
   --accent: #111111;
-  --max-reading-width: 820px;
+  --max-reading-width: 760px;
   --home-max-width: 1320px;
   --sans:
     ui-sans-serif, -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI",
@@ -97,7 +97,7 @@ button {
 
 .topBarTopLabel {
   font-family: var(--sans);
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.1;
   font-weight: 700;
   margin-bottom: 4px;
@@ -107,7 +107,7 @@ button {
 
 .topBarBottomLabel {
   font-family: var(--sans);
-  font-size: 17px;
+  font-size: 16px;
   line-height: 1.15;
   font-weight: 600;
   color: rgba(22, 22, 22, 0.72);
@@ -123,7 +123,7 @@ button {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(var(--progress-segments, 1), 1fr);
-  gap: 16px;
+  gap: 14px;
 }
 
 .bookProgressSegment {
@@ -164,8 +164,8 @@ button {
   margin: 0 auto;
   padding: 36px 28px 96px;
   display: grid;
-  grid-template-columns: 360px minmax(0, 1fr);
-  gap: 72px;
+  grid-template-columns: 340px minmax(0, 1fr);
+  gap: 64px;
 }
 
 .homeSidebar {
@@ -179,8 +179,7 @@ button {
 }
 
 .homeSidebarEyebrow,
-.sectionLabel,
-.tocOverlayPart {
+.sectionLabel {
   font-family: var(--sans);
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -191,7 +190,7 @@ button {
 
 .homeTitle {
   margin: 0 0 16px;
-  font-size: 38px;
+  font-size: 36px;
   line-height: 1.03;
   letter-spacing: -0.04em;
   font-weight: 500;
@@ -199,8 +198,8 @@ button {
 
 .homeIntro {
   margin: 0;
-  font-size: 18px;
-  line-height: 1.62;
+  font-size: 17px;
+  line-height: 1.58;
   color: rgba(22, 22, 22, 0.78);
 }
 
@@ -210,7 +209,7 @@ button {
 }
 
 .projectRailItem {
-  min-height: 54px;
+  min-height: 52px;
   border: 1px solid var(--line-strong);
   border-radius: 999px;
   padding: 0 18px;
@@ -220,7 +219,7 @@ button {
   justify-content: space-between;
   gap: 12px;
   font-family: var(--sans);
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
 }
 
@@ -248,8 +247,8 @@ button {
 .homeDescription {
   max-width: 760px;
   font-family: var(--sans);
-  font-size: 17px;
-  line-height: 1.58;
+  font-size: 16px;
+  line-height: 1.56;
   color: rgba(22, 22, 22, 0.72);
 }
 
@@ -260,7 +259,7 @@ button {
 
 .tocGroupHeader h2 {
   margin: 0 0 14px;
-  font-size: 25px;
+  font-size: 23px;
   line-height: 1.12;
   letter-spacing: -0.025em;
   font-weight: 600;
@@ -272,17 +271,17 @@ button {
 
 .tocRow {
   display: grid;
-  grid-template-columns: 50px minmax(0, 1fr);
+  grid-template-columns: 48px minmax(0, 1fr);
   gap: 16px;
   align-items: center;
-  min-height: 72px;
+  min-height: 68px;
   border-bottom: 1px solid var(--line-strong);
   background: rgba(255, 255, 255, 0.18);
 }
 
 .tocRowIcon {
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   margin-left: 12px;
   border: 1px solid var(--line-strong);
   border-radius: 999px;
@@ -294,18 +293,18 @@ button {
 }
 
 .tocRowBody {
-  padding: 14px 18px 14px 0;
+  padding: 12px 18px 12px 0;
   min-width: 0;
 }
 
 .tocRowTitle {
   font-family: var(--sans);
-  font-size: 17px;
+  font-size: 16px;
   line-height: 1.3;
 }
 
 .readingShell {
-  padding: 36px 20px 120px;
+  padding: 28px 20px 72px;
 }
 
 .readingArticleCentered {
@@ -314,22 +313,22 @@ button {
 }
 
 .readingHeader {
-  margin-bottom: 40px;
+  margin-bottom: 34px;
   text-align: left;
 }
 
 .readingHeader h1 {
   margin: 0;
-  font-size: clamp(50px, 6.2vw, 68px);
+  font-size: clamp(46px, 5.8vw, 62px);
   line-height: 0.99;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.04em;
   font-weight: 500;
 }
 
 .sectionDescription {
-  margin-top: 16px;
-  max-width: 700px;
-  font-size: 20px;
+  margin-top: 14px;
+  max-width: 660px;
+  font-size: 18px;
   line-height: 1.5;
   color: rgba(22, 22, 22, 0.76);
 }
@@ -341,23 +340,23 @@ button {
 .proseShell p,
 .proseShell li,
 .proseShell blockquote {
-  font-size: 22px;
-  line-height: 1.7;
-  margin: 0 0 1.1em;
+  font-size: 20px;
+  line-height: 1.68;
+  margin: 0 0 1.08em;
 }
 
 .proseShell h2 {
-  margin-top: 2.5em;
-  margin-bottom: 0.7em;
-  font-size: 36px;
+  margin-top: 2.4em;
+  margin-bottom: 0.68em;
+  font-size: 33px;
   line-height: 1.08;
-  letter-spacing: -0.028em;
+  letter-spacing: -0.025em;
 }
 
 .proseShell h3 {
-  margin-top: 2.15em;
-  margin-bottom: 0.65em;
-  font-size: 28px;
+  margin-top: 2.1em;
+  margin-bottom: 0.62em;
+  font-size: 26px;
   line-height: 1.14;
   letter-spacing: -0.02em;
 }
@@ -365,7 +364,7 @@ button {
 .proseShell ul,
 .proseShell ol {
   padding-left: 1.25em;
-  margin-bottom: 1.4em;
+  margin-bottom: 1.3em;
 }
 
 .proseShell blockquote {
@@ -376,7 +375,7 @@ button {
 
 .proseShell code {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.92em;
+  font-size: 0.9em;
   background: rgba(22, 22, 22, 0.06);
   padding: 0.1em 0.25em;
   border-radius: 4px;
@@ -393,8 +392,8 @@ button {
 }
 
 .footnotesSection {
-  margin-top: 72px;
-  padding-top: 28px;
+  margin-top: 64px;
+  padding-top: 24px;
   border-top: 1px solid var(--line);
 }
 
@@ -501,7 +500,7 @@ button {
   grid-template-columns: 28px minmax(0, 1fr) 32px;
   align-items: center;
   gap: 16px;
-  min-height: 58px;
+  min-height: 56px;
   padding: 8px 0 12px;
 }
 
@@ -514,7 +513,7 @@ button {
 
 .tocOverlayGroupTitle {
   font-family: var(--sans);
-  font-size: 24px;
+  font-size: 22px;
   line-height: 1.2;
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -546,7 +545,7 @@ button {
   align-items: center;
   justify-content: space-between;
   gap: 18px;
-  min-height: 68px;
+  min-height: 64px;
   padding: 14px 0;
   border-bottom: 1px solid var(--line);
 }
@@ -576,7 +575,7 @@ button {
 
 .tocOverlayItemTitle {
   font-family: var(--sans);
-  font-size: 17px;
+  font-size: 16px;
   line-height: 1.3;
   color: var(--text);
 }
@@ -603,20 +602,19 @@ button {
 }
 
 .nextSectionBar {
-  border-top: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.22);
-  margin-top: 56px;
+  margin-top: 48px;
 }
 
 .nextSectionBarInner {
-  max-width: 1480px;
+  max-width: var(--max-reading-width);
   margin: 0 auto;
-  min-height: 176px;
-  padding: 32px 110px;
+  min-height: 150px;
+  padding: 28px 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 32px;
+  gap: 28px;
+  border-top: 1px solid var(--line);
 }
 
 .nextSectionMeta {
@@ -625,7 +623,7 @@ button {
 
 .nextSectionLabel {
   font-family: var(--sans);
-  font-size: 17px;
+  font-size: 16px;
   line-height: 1.2;
   font-weight: 700;
   margin-bottom: 8px;
@@ -633,16 +631,16 @@ button {
 
 .nextSectionTitle {
   font-family: var(--sans);
-  font-size: 21px;
+  font-size: 19px;
   line-height: 1.3;
   color: rgba(22, 22, 22, 0.72);
 }
 
 .nextSectionButton {
   flex: 0 0 auto;
-  min-width: 180px;
-  height: 80px;
-  padding: 0 34px;
+  min-width: 164px;
+  height: 72px;
+  padding: 0 30px;
   border-radius: 999px;
   background: #000;
   color: #fff;
@@ -651,7 +649,7 @@ button {
   justify-content: center;
   gap: 10px;
   font-family: var(--sans);
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 700;
 }
 
@@ -666,7 +664,7 @@ button {
 
 .standardPageInner h1 {
   margin: 0 0 16px;
-  font-size: 54px;
+  font-size: 46px;
   line-height: 1;
   letter-spacing: -0.04em;
   font-weight: 500;
@@ -674,8 +672,8 @@ button {
 
 .standardLead {
   max-width: 760px;
-  font-size: 22px;
-  line-height: 1.6;
+  font-size: 19px;
+  line-height: 1.58;
   color: rgba(22, 22, 22, 0.76);
 }
 
@@ -687,22 +685,36 @@ button {
 
 .projectPageCard {
   display: block;
-  padding: 24px;
+  padding: 22px;
   border: 1px solid var(--line-strong);
   background: rgba(255, 255, 255, 0.25);
 }
 
+.projectPageCardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.projectPageCard.disabled {
+  color: rgba(22, 22, 22, 0.42);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(22, 22, 22, 0.1);
+  cursor: default;
+}
+
 .projectPageCard h2 {
-  margin: 0 0 10px;
-  font-size: 28px;
+  margin: 0 0 8px;
+  font-size: 24px;
   line-height: 1.1;
 }
 
 .projectPageCard p {
   margin: 0;
   font-family: var(--sans);
-  font-size: 16px;
-  line-height: 1.55;
+  font-size: 15px;
+  line-height: 1.52;
   color: var(--muted);
 }
 
@@ -719,18 +731,18 @@ button {
 
 @media (max-width: 980px) {
   .nextSectionBarInner {
-    padding: 28px 24px;
-    min-height: 148px;
+    min-height: 138px;
+    padding: 24px 0;
   }
 
   .nextSectionButton {
-    min-width: 156px;
-    height: 70px;
-    font-size: 21px;
+    min-width: 148px;
+    height: 66px;
+    font-size: 20px;
   }
 
   .nextSectionTitle {
-    font-size: 19px;
+    font-size: 18px;
   }
 }
 
@@ -745,18 +757,18 @@ button {
   }
 
   .readingHeader h1 {
-    font-size: clamp(44px, 12vw, 60px);
+    font-size: clamp(40px, 11vw, 54px);
   }
 
   .sectionDescription {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .proseShell p,
   .proseShell li,
   .proseShell blockquote {
-    font-size: 21px;
-    line-height: 1.68;
+    font-size: 19px;
+    line-height: 1.64;
   }
 
   .tocRow {
@@ -791,7 +803,7 @@ button {
   }
 
   .homeTitle {
-    font-size: 36px;
+    font-size: 34px;
   }
 
   .tocOverlayPanel {
@@ -809,10 +821,10 @@ button {
   }
 
   .tocOverlayGroupTitle {
-    font-size: 21px;
+    font-size: 20px;
   }
 
   .tocOverlayItemTitle {
-    font-size: 16px;
+    font-size: 15px;
   }
 }

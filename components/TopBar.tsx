@@ -8,7 +8,7 @@ export default function TopBar({
   currentSlug,
   rightSlot,
   logoSrc = "/logo-horizontal.png",
-  logoAlt = "KNIT",
+  logoAlt = "knit",
 }: {
   topLabel?: string;
   bottomLabel?: string;
@@ -21,7 +21,7 @@ export default function TopBar({
     <header className="topBar">
       <div className="topBarInner">
         <div className="topBarLeft">
-          <Link href="/" className="brand" aria-label="KNIT home">
+          <Link href="/" className="brand" aria-label="knit home">
             <Image
               src={logoSrc}
               alt={logoAlt}
