@@ -528,6 +528,7 @@ button {
 
 .tocOverlayList {
   border-top: 1px solid var(--line);
+  padding-left: 38px;
 }
 
 .tocOverlayItem {

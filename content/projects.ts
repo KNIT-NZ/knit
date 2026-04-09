@@ -28,18 +28,4 @@ export const projectLinks: ProjectLink[] = [
     external: true,
     description: "Public, blockchain-backed platform for the collaborative development, refinement, and critique of laws and policies.",
   },
-  {
-    title: "Projects",
-    href: "/projects",
-    enabled: true,
-    external: false,
-    description: "Overview of the ecosystem.",
-  },
-  {
-    title: "Archive",
-    href: "/archive",
-    enabled: false,
-    external: false,
-    description: "Future publications and supporting material.",
-  },
 ];

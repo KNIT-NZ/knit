@@ -2,7 +2,39 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import TopBar from "@/components/TopBar";
 import { manifest } from "@/content/manifest";
-import { projectLinks } from "@/content/projects";
+
+const homeSidebarLinks = [
+  {
+    title: "Projects",
+    href: "/projects",
+    enabled: true,
+    external: false,
+  },
+  {
+    title: "Open Order",
+    href: "https://open-order.knit.nz",
+    enabled: true,
+    external: true,
+  },
+  {
+    title: "Civic Brain",
+    href: "https://tbd.knit.nz",
+    enabled: false,
+    external: true,
+  },
+   {
+    title: "Liquid Policy Shop",
+    href: "https://tbd.knit.nz",
+    enabled: false,
+    external: true,
+  },
+  {
+    title: "Archive",
+    href: "/archive",
+    enabled: false,
+    external: false,
+  },
+];
 
 export default function HomePage() {
   const grouped = groupManifest();
@@ -14,14 +46,17 @@ export default function HomePage() {
       <main className="homeShell">
         <aside className="homeSidebar">
           <div className="homeSidebarCard">
-            <h1 className="homeTitle">Towards a digital-first New Zealand Government.</h1>
+            <div className="homeSidebarEyebrow">KNIT</div>
+            <h1 className="homeTitle">A living doctrine for democratic infrastructure.</h1>
             <p className="homeIntro">
-              We are aiming at healthy and reasoned civic discourse through tools built for the digital age.
+              KNIT is the narrative and constitutional layer of a broader ecosystem:
+              a place to explain the democratic vision, legitimise the work, and route
+              readers into the institutions being built on the subdomains.
             </p>
           </div>
 
           <div className="projectRail">
-            {projectLinks.map((item) =>
+            {homeSidebarLinks.map((item) =>
               item.enabled ? (
                 <a
                   key={item.title}
@@ -50,7 +85,8 @@ export default function HomePage() {
           <div className="homeSectionHeader">
             <div className="sectionLabel">Contents</div>
             <div className="homeDescription">
-              Read our plan for re-tooling democracy section by section.
+              Read the living text section by section. Each page has its own canonical URL
+              and sits within a larger sequence.
             </div>
           </div>
 

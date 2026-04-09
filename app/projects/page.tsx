@@ -12,7 +12,7 @@ export default function ProjectsPage() {
           <div className="sectionLabel">Projects</div>
           <h1>Live institutions and experiments.</h1>
           <p className="standardLead">
-            These projects are testing our ideas in public.
+            The main domain explains the doctrine. The subdomains test it in public.
           </p>
 
           <div className="projectPageList">
