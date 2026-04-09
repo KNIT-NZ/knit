@@ -6,6 +6,13 @@ import { Menu, X, ArrowUpRight } from "lucide-react";
 import { manifest } from "@/content/manifest";
 import { clsx } from "clsx";
 
+type ManifestItem = (typeof manifest)[number];
+
+type PartGroup = {
+  part: string;
+  items: ManifestItem[];
+};
+
 export default function TocOverlay({
   currentSlug,
 }: {
@@ -37,8 +44,20 @@ export default function TocOverlay({
     };
   }, [open]);
 
-  const items = useMemo(() => {
-    return [...manifest].sort((a, b) => a.order - b.order);
+  const groups = useMemo<PartGroup[]>(() => {
+    const sorted = [...manifest].sort((a, b) => a.order - b.order);
+    const map = new Map<string, ManifestItem[]>();
+
+    for (const item of sorted) {
+      const key = item.part || "Untitled";
+      if (!map.has(key)) map.set(key, []);
+      map.get(key)!.push(item);
+    }
+
+    return Array.from(map.entries()).map(([part, items]) => ({
+      part,
+      items,
+    }));
   }, []);
 
   return (
@@ -80,33 +99,58 @@ export default function TocOverlay({
           </div>
 
           <div className="tocOverlayBody">
-            <nav className="tocOverlayNav">
-              {items.map((item, index) => (
-                <Link
-                  key={item.slug}
-                  href={`/${item.slug}`}
-                  scroll
-                  className={clsx("tocOverlayItem", {
-                    active: item.slug === currentSlug,
-                  })}
-                  onClick={() => setOpen(false)}
-                >
-                  <div className="tocOverlayItemLeft">
-                    <span className="tocOverlayItemIndex">{index + 1}</span>
-                    <span className="tocOverlayItemText">
-                      {item.part ? (
-                        <span className="tocOverlayItemPart">{item.part}</span>
-                      ) : null}
-                      <span className="tocOverlayItemTitle">{item.title}</span>
-                    </span>
-                  </div>
+            <div className="tocOverlayNav">
+              {groups.map((group, groupIndex) => {
+                const firstItem = group.items[0];
+                const partIsActive = group.items.some(
+                  (item) => item.slug === currentSlug
+                );
 
-                  <span className="tocOverlayItemIcon">
-                    <ArrowUpRight size={15} />
-                  </span>
-                </Link>
-              ))}
-            </nav>
+                return (
+                  <section key={`${group.part}-${groupIndex}`} className="tocOverlayGroup">
+                    <Link
+                      href={`/${firstItem.slug}`}
+                      scroll
+                      className={clsx("tocOverlayGroupHeading", {
+                        active: partIsActive,
+                      })}
+                      onClick={() => setOpen(false)}
+                    >
+                      <span className="tocOverlayGroupIndex">{groupIndex + 1}</span>
+                      <span className="tocOverlayGroupTitle">{group.part}</span>
+                      <span className="tocOverlayGroupIcon">
+                        <ArrowUpRight size={15} />
+                      </span>
+                    </Link>
+
+                    <nav className="tocOverlayList">
+                      {group.items.map((item, itemIndex) => (
+                        <Link
+                          key={item.slug}
+                          href={`/${item.slug}`}
+                          scroll
+                          className={clsx("tocOverlayItem", {
+                            active: item.slug === currentSlug,
+                          })}
+                          onClick={() => setOpen(false)}
+                        >
+                          <div className="tocOverlayItemLeft">
+                            <span className="tocOverlayItemIndex">{itemIndex + 1}</span>
+                            <span className="tocOverlayItemText">
+                              <span className="tocOverlayItemTitle">{item.title}</span>
+                            </span>
+                          </div>
+
+                          <span className="tocOverlayItemIcon">
+                            <ArrowUpRight size={15} />
+                          </span>
+                        </Link>
+                      ))}
+                    </nav>
+                  </section>
+                );
+              })}
+            </div>
           </div>
         </aside>
       </div>
