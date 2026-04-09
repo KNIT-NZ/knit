@@ -316,9 +316,9 @@ button {
 
 .readingHeader h1 {
   margin: 0;
-  font-size: clamp(46px, 5.8vw, 62px);
+  font-size: clamp(36px, 4.8vw, 52px);
   line-height: 0.99;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.02em;
   font-weight: 500;
 }
 
@@ -628,9 +628,9 @@ button {
 
 .standardPageInner h1 {
   margin: 0 0 16px;
-  font-size: 46px;
+  font-size: 36px;
   line-height: 1;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.02em;
   font-weight: 500;
 }
 
@@ -721,14 +721,14 @@ button {
   }
 
   .readingHeader h1 {
-    font-size: clamp(40px, 11vw, 54px);
+    font-size: clamp(30px, 7vw, 44px);
   }
 
   .proseShell p,
   .proseShell li,
   .proseShell blockquote {
-    font-size: 19px;
-    line-height: 1.64;
+    font-size: 17px;
+    line-height: 1.44;
   }
 
   .tocRow {

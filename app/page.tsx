@@ -12,7 +12,7 @@ const homeSidebarLinks = [
   },
   {
     title: "Open Order",
-    href: "https://open-order.knit.nz",
+    href: "https://openorder.knit.nz",
     enabled: true,
     external: true,
   },
