@@ -1,9 +1,8 @@
-// components/TocOverlay.tsx
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ArrowUpRight } from "lucide-react";
 import { manifest } from "@/content/manifest";
 import { clsx } from "clsx";
 
@@ -16,7 +15,9 @@ export default function TocOverlay({
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape") {
+        setOpen(false);
+      }
     };
 
     window.addEventListener("keydown", onKeyDown);
@@ -24,23 +25,20 @@ export default function TocOverlay({
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
+    if (!open) {
+      document.body.style.overflow = "";
+      return;
+    }
+
+    document.body.style.overflow = "hidden";
+
     return () => {
       document.body.style.overflow = "";
     };
   }, [open]);
 
-  const grouped = useMemo(() => {
-    const sorted = [...manifest].sort((a, b) => a.order - b.order);
-    const map = new Map<string, typeof sorted>();
-
-    for (const item of sorted) {
-      const key = item.part || "";
-      if (!map.has(key)) map.set(key, []);
-      map.get(key)!.push(item);
-    }
-
-    return Array.from(map.entries());
+  const items = useMemo(() => {
+    return [...manifest].sort((a, b) => a.order - b.order);
   }, []);
 
   return (
@@ -54,12 +52,26 @@ export default function TocOverlay({
         <Menu size={18} />
       </button>
 
-      <div className={clsx("tocOverlay", { open })}>
-        <div className="tocOverlayBackdrop" onClick={() => setOpen(false)} />
+      <div
+        className={clsx("tocOverlay", { open })}
+        aria-hidden={!open}
+      >
+        <button
+          type="button"
+          className="tocOverlayBackdrop"
+          onClick={() => setOpen(false)}
+          aria-label="Close table of contents"
+        />
 
-        <div className="tocOverlayPanel">
+        <aside
+          className="tocOverlayPanel"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Table of contents"
+        >
           <div className="tocOverlayHeader">
             <div className="tocOverlayTitle">Contents</div>
+
             <button
               type="button"
               className="menuButton"
@@ -71,33 +83,39 @@ export default function TocOverlay({
           </div>
 
           <div className="tocOverlayBody">
-            {grouped.map(([part, items], index) => (
-              <section key={`${part}-${index}`} className="tocOverlaySection">
-                {part ? <div className="tocOverlayPart">{part}</div> : null}
-
-                <div className="tocOverlayList">
-                  {items.map((item) => (
-                    <Link
-                      key={item.slug}
-                      href={`/${item.slug}`}
-                      className={clsx("tocOverlayItem", {
-                        active: item.slug === currentSlug,
-                      })}
-                      onClick={() => setOpen(false)}
-                    >
+            <nav className="tocOverlayNav">
+              {items.map((item, index) => (
+                <Link
+                  key={item.slug}
+                  href={`/${item.slug}`}
+                  className={clsx("tocOverlayItem", {
+                    active: item.slug === currentSlug,
+                  })}
+                  onClick={() => setOpen(false)}
+                >
+                  <div className="tocOverlayItemLeft">
+                    <span className="tocOverlayItemIndex">{index + 1}</span>
+                    <span className="tocOverlayItemText">
+                      {item.part ? (
+                        <span className="tocOverlayItemPart">{item.part}</span>
+                      ) : null}
                       <span className="tocOverlayItemTitle">{item.title}</span>
                       {item.description ? (
                         <span className="tocOverlayItemDescription">
                           {item.description}
                         </span>
                       ) : null}
-                    </Link>
-                  ))}
-                </div>
-              </section>
-            ))}
+                    </span>
+                  </div>
+
+                  <span className="tocOverlayItemIcon">
+                    <ArrowUpRight size={15} />
+                  </span>
+                </Link>
+              ))}
+            </nav>
           </div>
-        </div>
+        </aside>
       </div>
     </>
   );
