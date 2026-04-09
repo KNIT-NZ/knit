@@ -44,3 +44,44 @@ export function getAdjacentSections(slug: string) {
     next: index < items.length - 1 ? items[index + 1] : null,
   };
 }
+
+export function getProgressParts() {
+  const items = getAllManifestItems();
+
+  const grouped = new Map<
+    string,
+    {
+      part: string;
+      slugs: string[];
+      weight: number;
+    }
+  >();
+
+  for (const item of items) {
+    const section = getSectionBySlug(item.slug);
+    const part = item.part || "Untitled";
+    const weight = Math.max(1, countWords(section?.content || ""));
+
+    if (!grouped.has(part)) {
+      grouped.set(part, {
+        part,
+        slugs: [],
+        weight: 0,
+      });
+    }
+
+    const group = grouped.get(part)!;
+    group.slugs.push(item.slug);
+    group.weight += weight;
+  }
+
+  return Array.from(grouped.values());
+}
+
+function countWords(content: string): number {
+  return content
+    .replace(/<[^>]+>/g, " ")
+    .replace(/[^\w\s-]/g, " ")
+    .split(/\s+/)
+    .filter(Boolean).length;
+}

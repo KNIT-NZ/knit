@@ -22,9 +22,7 @@ export default function TocOverlay({
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setOpen(false);
-      }
+      if (event.key === "Escape") setOpen(false);
     };
 
     window.addEventListener("keydown", onKeyDown);
@@ -32,13 +30,7 @@ export default function TocOverlay({
   }, []);
 
   useEffect(() => {
-    if (!open) {
-      document.body.style.overflow = "";
-      return;
-    }
-
-    document.body.style.overflow = "hidden";
-
+    document.body.style.overflow = open ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
@@ -119,12 +111,12 @@ export default function TocOverlay({
                       <span className="tocOverlayGroupIndex">{groupIndex + 1}</span>
                       <span className="tocOverlayGroupTitle">{group.part}</span>
                       <span className="tocOverlayGroupIcon">
-                        <ArrowUpRight size={15} />
+                        <ArrowUpRight size={14} />
                       </span>
                     </Link>
 
                     <nav className="tocOverlayList">
-                      {group.items.map((item, itemIndex) => (
+                      {group.items.map((item) => (
                         <Link
                           key={item.slug}
                           href={`/${item.slug}`}
@@ -134,15 +126,10 @@ export default function TocOverlay({
                           })}
                           onClick={() => setOpen(false)}
                         >
-                          <div className="tocOverlayItemLeft">
-                            <span className="tocOverlayItemIndex">{itemIndex + 1}</span>
-                            <span className="tocOverlayItemText">
-                              <span className="tocOverlayItemTitle">{item.title}</span>
-                            </span>
-                          </div>
+                          <span className="tocOverlayItemTitle">{item.title}</span>
 
                           <span className="tocOverlayItemIcon">
-                            <ArrowUpRight size={15} />
+                            <ArrowUpRight size={14} />
                           </span>
                         </Link>
                       ))}

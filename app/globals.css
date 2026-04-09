@@ -121,8 +121,8 @@ button {
 
 .bookProgress {
   width: 100%;
-  display: grid;
-  grid-template-columns: repeat(var(--progress-segments, 1), 1fr);
+  display: flex;
+  align-items: center;
   gap: 14px;
 }
 
@@ -132,6 +132,7 @@ button {
   border-radius: 999px;
   background: rgba(22, 22, 22, 0.11);
   overflow: hidden;
+  flex: 0 0 auto;
 }
 
 .bookProgressSegmentFill {
@@ -304,7 +305,7 @@ button {
 }
 
 .readingShell {
-  padding: 28px 20px 72px;
+  padding: 24px 20px 56px;
 }
 
 .readingArticleCentered {
@@ -313,7 +314,7 @@ button {
 }
 
 .readingHeader {
-  margin-bottom: 34px;
+  margin-bottom: 32px;
   text-align: left;
 }
 
@@ -323,14 +324,6 @@ button {
   line-height: 0.99;
   letter-spacing: -0.04em;
   font-weight: 500;
-}
-
-.sectionDescription {
-  margin-top: 14px;
-  max-width: 660px;
-  font-size: 18px;
-  line-height: 1.5;
-  color: rgba(22, 22, 22, 0.76);
 }
 
 .proseShell {
@@ -445,7 +438,7 @@ button {
   position: absolute;
   top: 0;
   right: 0;
-  width: min(760px, 100vw);
+  width: min(560px, 100vw);
   height: 100dvh;
   background: var(--paper);
   border-left: 1px solid var(--line);
@@ -497,11 +490,11 @@ button {
 
 .tocOverlayGroupHeading {
   display: grid;
-  grid-template-columns: 28px minmax(0, 1fr) 32px;
+  grid-template-columns: 24px minmax(0, 1fr) 32px;
   align-items: center;
-  gap: 16px;
-  min-height: 56px;
-  padding: 8px 0 12px;
+  gap: 14px;
+  min-height: 52px;
+  padding: 8px 0 10px;
 }
 
 .tocOverlayGroupIndex {
@@ -513,7 +506,7 @@ button {
 
 .tocOverlayGroupTitle {
   font-family: var(--sans);
-  font-size: 22px;
+  font-size: 20px;
   line-height: 1.2;
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -532,10 +525,6 @@ button {
   background: rgba(255, 255, 255, 0.45);
 }
 
-.tocOverlayGroupHeading.active .tocOverlayGroupTitle {
-  color: var(--text);
-}
-
 .tocOverlayList {
   border-top: 1px solid var(--line);
 }
@@ -545,37 +534,14 @@ button {
   align-items: center;
   justify-content: space-between;
   gap: 18px;
-  min-height: 64px;
-  padding: 14px 0;
+  min-height: 58px;
+  padding: 12px 0;
   border-bottom: 1px solid var(--line);
-}
-
-.tocOverlayItemLeft {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  min-width: 0;
-}
-
-.tocOverlayItemIndex {
-  flex: 0 0 auto;
-  width: 24px;
-  font-family: var(--sans);
-  font-size: 12px;
-  line-height: 1.4;
-  color: var(--muted);
-  padding-top: 2px;
-}
-
-.tocOverlayItemText {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
 }
 
 .tocOverlayItemTitle {
   font-family: var(--sans);
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.3;
   color: var(--text);
 }
@@ -597,23 +563,19 @@ button {
   font-weight: 700;
 }
 
-.tocOverlayItem.active .tocOverlayItemIcon {
-  border-color: rgba(22, 22, 22, 0.28);
-}
-
 .nextSectionBar {
-  margin-top: 48px;
+  margin-top: 40px;
 }
 
 .nextSectionBarInner {
   max-width: var(--max-reading-width);
   margin: 0 auto;
-  min-height: 150px;
-  padding: 28px 0;
+  min-height: 110px;
+  padding: 20px 0 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 28px;
+  gap: 24px;
   border-top: 1px solid var(--line);
 }
 
@@ -623,33 +585,33 @@ button {
 
 .nextSectionLabel {
   font-family: var(--sans);
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.2;
   font-weight: 700;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .nextSectionTitle {
   font-family: var(--sans);
-  font-size: 19px;
+  font-size: 18px;
   line-height: 1.3;
   color: rgba(22, 22, 22, 0.72);
 }
 
 .nextSectionButton {
   flex: 0 0 auto;
-  min-width: 164px;
-  height: 72px;
-  padding: 0 30px;
+  min-width: 112px;
+  height: 52px;
+  padding: 0 20px;
   border-radius: 999px;
   background: #000;
   color: #fff;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   font-family: var(--sans);
-  font-size: 22px;
+  font-size: 17px;
   font-weight: 700;
 }
 
@@ -731,18 +693,18 @@ button {
 
 @media (max-width: 980px) {
   .nextSectionBarInner {
-    min-height: 138px;
-    padding: 24px 0;
+    min-height: 98px;
+    padding: 18px 0 0;
   }
 
   .nextSectionButton {
-    min-width: 148px;
-    height: 66px;
-    font-size: 20px;
+    min-width: 104px;
+    height: 48px;
+    font-size: 16px;
   }
 
   .nextSectionTitle {
-    font-size: 18px;
+    font-size: 17px;
   }
 }
 
@@ -758,10 +720,6 @@ button {
 
   .readingHeader h1 {
     font-size: clamp(40px, 11vw, 54px);
-  }
-
-  .sectionDescription {
-    font-size: 18px;
   }
 
   .proseShell p,
@@ -790,7 +748,7 @@ button {
   .nextSectionButton {
     min-width: 0;
     width: auto;
-    padding: 0 28px;
+    padding: 0 18px;
   }
 }
 
@@ -821,10 +779,10 @@ button {
   }
 
   .tocOverlayGroupTitle {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .tocOverlayItemTitle {
-    font-size: 15px;
+    font-size: 14px;
   }
 }

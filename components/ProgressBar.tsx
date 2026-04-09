@@ -1,22 +1,24 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { manifest } from "@/content/manifest";
 
-type PartGroup = {
+export type ProgressPart = {
   part: string;
-  items: typeof manifest;
+  slugs: string[];
+  weight: number;
 };
 
 export default function ProgressBar({
   currentSlug,
+  parts,
 }: {
   currentSlug?: string;
+  parts?: ProgressPart[];
 }) {
   const [pageProgress, setPageProgress] = useState(0);
 
   useEffect(() => {
-    if (!currentSlug) return;
+    if (!currentSlug || !parts?.length) return;
 
     const updateProgress = () => {
       const scrollTop = window.scrollY;
@@ -34,57 +36,54 @@ export default function ProgressBar({
       window.removeEventListener("scroll", updateProgress);
       window.removeEventListener("resize", updateProgress);
     };
-  }, [currentSlug]);
+  }, [currentSlug, parts]);
 
-  const parts = useMemo<PartGroup[]>(() => {
-    const sorted = [...manifest].sort((a, b) => a.order - b.order);
-    const groups = new Map<string, typeof manifest>();
+  const computed = useMemo(() => {
+    if (!currentSlug || !parts?.length) return null;
 
-    for (const item of sorted) {
-      const key = item.part || "Untitled";
-      if (!groups.has(key)) groups.set(key, []);
-      groups.get(key)!.push(item);
-    }
+    const totalWeight = parts.reduce((sum, part) => sum + part.weight, 0) || 1;
 
-    return Array.from(groups.entries()).map(([part, items]) => ({
-      part,
-      items,
-    }));
-  }, []);
+    return parts.map((part) => {
+      const currentIndex = part.slugs.findIndex((slug) => slug === currentSlug);
 
-  if (!currentSlug) return null;
+      let fill = 0;
+
+      if (currentIndex === -1) {
+        const currentPartIndex = parts.findIndex((p) => p.slugs.includes(currentSlug));
+        const thisPartIndex = parts.findIndex((p) => p.part === part.part);
+
+        if (thisPartIndex < currentPartIndex) {
+          fill = 1;
+        }
+      } else {
+        const sectionFraction = 1 / part.slugs.length;
+        fill = currentIndex * sectionFraction + pageProgress * sectionFraction;
+      }
+
+      return {
+        ...part,
+        widthPercent: (part.weight / totalWeight) * 100,
+        fill: Math.min(1, fill),
+      };
+    });
+  }, [currentSlug, parts, pageProgress]);
+
+  if (!currentSlug || !computed?.length) return null;
 
   return (
-    <div
-      className="bookProgress"
-      aria-hidden="true"
-      style={{ ["--progress-segments" as any]: parts.length }}
-    >
-      {parts.map((group) => {
-        const currentIndex = group.items.findIndex((item) => item.slug === currentSlug);
-
-        let fill = 0;
-
-        if (currentIndex === -1) {
-          const currentOrder = manifest.find((m) => m.slug === currentSlug)?.order ?? -1;
-          const lastOrderInPart = group.items[group.items.length - 1]?.order ?? -1;
-          if (lastOrderInPart < currentOrder) {
-            fill = 1;
-          }
-        } else {
-          const sectionFraction = 1 / group.items.length;
-          fill = currentIndex * sectionFraction + pageProgress * sectionFraction;
-        }
-
-        return (
-          <div key={group.part} className="bookProgressSegment">
-            <div
-              className="bookProgressSegmentFill"
-              style={{ transform: `scaleX(${Math.min(1, fill)})` }}
-            />
-          </div>
-        );
-      })}
+    <div className="bookProgress" aria-hidden="true">
+      {computed.map((part) => (
+        <div
+          key={part.part}
+          className="bookProgressSegment"
+          style={{ width: `${part.widthPercent}%` }}
+        >
+          <div
+            className="bookProgressSegmentFill"
+            style={{ transform: `scaleX(${part.fill})` }}
+          />
+        </div>
+      ))}
     </div>
   );
 }

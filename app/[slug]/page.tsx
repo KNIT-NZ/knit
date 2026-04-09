@@ -4,7 +4,12 @@ import { notFound } from "next/navigation";
 import TopBar from "@/components/TopBar";
 import TocOverlay from "@/components/TocOverlay";
 import ScrollToTopOnPathChange from "@/components/ScrollToTopOnPathChange";
-import { getAdjacentSections, getSectionBySlug, getSectionSlugs } from "@/lib/content";
+import {
+  getAdjacentSections,
+  getProgressParts,
+  getSectionBySlug,
+  getSectionSlugs,
+} from "@/lib/content";
 
 export function generateStaticParams() {
   return getSectionSlugs().map((slug) => ({ slug }));
@@ -21,6 +26,7 @@ export default async function SectionPage({
   if (!section) notFound();
 
   const { next } = getAdjacentSections(slug);
+  const progressParts = getProgressParts();
   const MDXContent = (await import(`@/content/sections/${slug}.mdx`)).default;
 
   return (
@@ -31,6 +37,7 @@ export default async function SectionPage({
         topLabel={section.part || undefined}
         bottomLabel={section.title}
         currentSlug={slug}
+        progressParts={progressParts}
         rightSlot={<TocOverlay currentSlug={slug} />}
       />
 
@@ -56,7 +63,7 @@ export default async function SectionPage({
 
             <Link href={`/${next.slug}`} scroll className="nextSectionButton">
               <span>Next</span>
-              <ChevronRight size={20} />
+              <ChevronRight size={16} />
             </Link>
           </div>
         </section>

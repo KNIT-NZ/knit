@@ -50,8 +50,7 @@ export default function HomePage() {
           <div className="homeSectionHeader">
             <div className="sectionLabel">Contents</div>
             <div className="homeDescription">
-              Read the living text section by section. Each page has its own canonical URL
-              and sits within a larger sequence.
+              Read our plan for re-tooling democracy section by section.
             </div>
           </div>
 
