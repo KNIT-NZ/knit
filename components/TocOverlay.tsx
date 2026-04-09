@@ -6,11 +6,7 @@ import { Menu, X, ArrowUpRight } from "lucide-react";
 import { manifest } from "@/content/manifest";
 import { clsx } from "clsx";
 
-export default function TocOverlay({
-  currentSlug,
-}: {
-  currentSlug?: string;
-}) {
+export default function TocOverlay({ currentSlug }: { currentSlug?: string }) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -52,10 +48,7 @@ export default function TocOverlay({
         <Menu size={18} />
       </button>
 
-      <div
-        className={clsx("tocOverlay", { open })}
-        aria-hidden={!open}
-      >
+      <div className={clsx("tocOverlay", { open })} aria-hidden={!open}>
         <button
           type="button"
           className="tocOverlayBackdrop"
@@ -88,6 +81,7 @@ export default function TocOverlay({
                 <Link
                   key={item.slug}
                   href={`/${item.slug}`}
+                  scroll
                   className={clsx("tocOverlayItem", {
                     active: item.slug === currentSlug,
                   })}

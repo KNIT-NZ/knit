@@ -1,8 +1,8 @@
-// app/[slug]/page.tsx
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import TopBar from "@/components/TopBar";
 import TocOverlay from "@/components/TocOverlay";
+import ScrollToTopOnPathChange from "@/components/ScrollToTopOnPathChange";
 import { getAdjacentSections, getSectionBySlug, getSectionSlugs } from "@/lib/content";
 
 export function generateStaticParams() {
@@ -24,6 +24,8 @@ export default async function SectionPage({
 
   return (
     <>
+      <ScrollToTopOnPathChange />
+
       <TopBar
         topLabel={section.part || undefined}
         bottomLabel={section.title}
@@ -47,14 +49,14 @@ export default async function SectionPage({
           <footer className="readingFooter">
             <div>
               {prev ? (
-                <Link href={`/${prev.slug}`} className="navPrev">
+                <Link href={`/${prev.slug}`} scroll className="navPrev">
                   ← {prev.title}
                 </Link>
               ) : null}
             </div>
             <div>
               {next ? (
-                <Link href={`/${next.slug}`} className="navNext">
+                <Link href={`/${next.slug}`} scroll className="navNext">
                   {next.title} →
                 </Link>
               ) : null}
