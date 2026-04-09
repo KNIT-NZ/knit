@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ChevronRight } from "lucide-react";
 import { notFound } from "next/navigation";
 import TopBar from "@/components/TopBar";
 import TocOverlay from "@/components/TocOverlay";
@@ -19,7 +20,7 @@ export default async function SectionPage({
 
   if (!section) notFound();
 
-  const { prev, next } = getAdjacentSections(slug);
+  const { next } = getAdjacentSections(slug);
   const MDXContent = (await import(`@/content/sections/${slug}.mdx`)).default;
 
   return (
@@ -45,25 +46,24 @@ export default async function SectionPage({
           <div className="proseShell">
             <MDXContent />
           </div>
-
-          <footer className="readingFooter">
-            <div>
-              {prev ? (
-                <Link href={`/${prev.slug}`} scroll className="navPrev">
-                  ← {prev.title}
-                </Link>
-              ) : null}
-            </div>
-            <div>
-              {next ? (
-                <Link href={`/${next.slug}`} scroll className="navNext">
-                  {next.title} →
-                </Link>
-              ) : null}
-            </div>
-          </footer>
         </article>
       </main>
+
+      {next ? (
+        <section className="nextSectionBar">
+          <div className="nextSectionBarInner">
+            <div className="nextSectionMeta">
+              <div className="nextSectionLabel">Next Section:</div>
+              <div className="nextSectionTitle">{next.title}</div>
+            </div>
+
+            <Link href={`/${next.slug}`} scroll className="nextSectionButton">
+              <span>Next</span>
+              <ChevronRight size={20} />
+            </Link>
+          </div>
+        </section>
+      ) : null}
     </>
   );
 }

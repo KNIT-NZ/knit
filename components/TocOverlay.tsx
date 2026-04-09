@@ -6,7 +6,11 @@ import { Menu, X, ArrowUpRight } from "lucide-react";
 import { manifest } from "@/content/manifest";
 import { clsx } from "clsx";
 
-export default function TocOverlay({ currentSlug }: { currentSlug?: string }) {
+export default function TocOverlay({
+  currentSlug,
+}: {
+  currentSlug?: string;
+}) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -94,11 +98,6 @@ export default function TocOverlay({ currentSlug }: { currentSlug?: string }) {
                         <span className="tocOverlayItemPart">{item.part}</span>
                       ) : null}
                       <span className="tocOverlayItemTitle">{item.title}</span>
-                      {item.description ? (
-                        <span className="tocOverlayItemDescription">
-                          {item.description}
-                        </span>
-                      ) : null}
                     </span>
                   </div>
 

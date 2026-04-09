@@ -15,7 +15,7 @@ export default function ProjectsPage() {
 
           <div className="projectPageList">
             <a
-              href="https://open-order.knit.nz"
+              href="https://openorder.knit.nz"
               target="_blank"
               rel="noreferrer"
               className="projectPageCard"
@@ -25,13 +25,13 @@ export default function ProjectsPage() {
             </a>
 
             <a
-              href="https://swive.knit.nz"
+              href="https://tbd.knit.nz"
               target="_blank"
               rel="noreferrer"
               className="projectPageCard"
             >
-              <h2>Swive</h2>
-              <p>Psychometric civic engagement engine.</p>
+              <h2>Next</h2>
+              <p>Civic brain.</p>
             </a>
           </div>
         </div>

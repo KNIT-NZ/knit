@@ -10,8 +10,8 @@ const projectLinks = [
     enabled: true,
   },
   {
-    title: "Swive",
-    href: "https://swive.knit.nz",
+    title: "TBD",
+    href: "https://tbd.knit.nz",
     enabled: false,
   },
   {
@@ -37,14 +37,11 @@ export default function HomePage() {
         <aside className="homeSidebar">
           <div className="homeSidebarCard">
             <div className="homeSidebarEyebrow">KNIT</div>
-            <h1 className="homeTitle">
-              A living doctrine for democratic infrastructure.
-            </h1>
+            <h1 className="homeTitle">Towards a digital-first New Zealand Government.</h1>
             <p className="homeIntro">
-              KNIT is the narrative and constitutional layer of a broader
-              ecosystem: a place to explain the democratic vision, legitimise
-              the work, and route readers into the institutions being built on
-              the subdomains.
+              KNIT is the narrative and constitutional layer of a broader ecosystem:
+              a place to explain the democratic vision, legitimise the work, and route
+              readers into the institutions being built on the subdomains.
             </p>
           </div>
 
@@ -69,7 +66,7 @@ export default function HomePage() {
                 >
                   <span className="projectRailLabel">{item.title}</span>
                 </div>
-              ),
+              )
             )}
           </div>
         </aside>
@@ -78,8 +75,7 @@ export default function HomePage() {
           <div className="homeSectionHeader">
             <div className="sectionLabel">Contents</div>
             <div className="homeDescription">
-              Read the living text section by section. Each page has its own
-              canonical URL and sits within a larger sequence.
+              Read our plan for re-tooling democracy section by section.
             </div>
           </div>
 
@@ -94,22 +90,12 @@ export default function HomePage() {
 
                 <div className="tocGroupList">
                   {items.map((item) => (
-                    <Link
-                      key={item.slug}
-                      href={`/${item.slug}`}
-                      scroll
-                      className="tocRow"
-                    >
+                    <Link key={item.slug} href={`/${item.slug}`} scroll className="tocRow">
                       <div className="tocRowIcon">
                         <ArrowUpRight size={16} />
                       </div>
                       <div className="tocRowBody">
                         <div className="tocRowTitle">{item.title}</div>
-                        {item.description ? (
-                          <div className="tocRowDescription">
-                            {item.description}
-                          </div>
-                        ) : null}
                       </div>
                     </Link>
                   ))}

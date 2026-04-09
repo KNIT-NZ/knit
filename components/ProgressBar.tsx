@@ -3,7 +3,16 @@
 import { useEffect, useMemo, useState } from "react";
 import { manifest } from "@/content/manifest";
 
-export default function ProgressBar({ currentSlug }: { currentSlug?: string }) {
+type PartGroup = {
+  part: string;
+  items: typeof manifest;
+};
+
+export default function ProgressBar({
+  currentSlug,
+}: {
+  currentSlug?: string;
+}) {
   const [pageProgress, setPageProgress] = useState(0);
 
   useEffect(() => {
@@ -27,33 +36,51 @@ export default function ProgressBar({ currentSlug }: { currentSlug?: string }) {
     };
   }, [currentSlug]);
 
-  const ordered = useMemo(
-    () => [...manifest].sort((a, b) => a.order - b.order),
-    [],
-  );
+  const parts = useMemo<PartGroup[]>(() => {
+    const sorted = [...manifest].sort((a, b) => a.order - b.order);
+    const groups = new Map<string, typeof manifest>();
+
+    for (const item of sorted) {
+      const key = item.part || "Untitled";
+      if (!groups.has(key)) groups.set(key, []);
+      groups.get(key)!.push(item);
+    }
+
+    return Array.from(groups.entries()).map(([part, items]) => ({
+      part,
+      items,
+    }));
+  }, []);
 
   if (!currentSlug) return null;
-
-  const currentIndex = ordered.findIndex((item) => item.slug === currentSlug);
-  if (currentIndex === -1) return null;
 
   return (
     <div
       className="bookProgress"
       aria-hidden="true"
-      style={{ ["--progress-segments" as any]: ordered.length }}
+      style={{ ["--progress-segments" as any]: parts.length }}
     >
-      {ordered.map((item, index) => {
+      {parts.map((group) => {
+        const currentIndex = group.items.findIndex((item) => item.slug === currentSlug);
+
         let fill = 0;
 
-        if (index < currentIndex) fill = 1;
-        if (index === currentIndex) fill = pageProgress;
+        if (currentIndex === -1) {
+          const currentOrder = manifest.find((m) => m.slug === currentSlug)?.order ?? -1;
+          const lastOrderInPart = group.items[group.items.length - 1]?.order ?? -1;
+          if (lastOrderInPart < currentOrder) {
+            fill = 1;
+          }
+        } else {
+          const sectionFraction = 1 / group.items.length;
+          fill = currentIndex * sectionFraction + pageProgress * sectionFraction;
+        }
 
         return (
-          <div key={item.slug} className="bookProgressSegment">
+          <div key={group.part} className="bookProgressSegment">
             <div
               className="bookProgressSegmentFill"
-              style={{ transform: `scaleX(${fill})` }}
+              style={{ transform: `scaleX(${Math.min(1, fill)})` }}
             />
           </div>
         );
