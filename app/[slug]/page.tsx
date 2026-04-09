@@ -3,7 +3,6 @@ import { ChevronRight } from "lucide-react";
 import { notFound } from "next/navigation";
 import TopBar from "@/components/TopBar";
 import TocOverlay from "@/components/TocOverlay";
-import ScrollToTopOnPathChange from "@/components/ScrollToTopOnPathChange";
 import {
   getAdjacentSections,
   getProgressParts,
@@ -31,8 +30,6 @@ export default async function SectionPage({
 
   return (
     <>
-      <ScrollToTopOnPathChange />
-
       <TopBar
         topLabel={section.part || undefined}
         bottomLabel={section.title}

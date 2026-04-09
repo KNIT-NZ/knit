@@ -409,6 +409,11 @@ button {
   color: var(--muted);
 }
 
+[id^="fnref-"],
+[id^="fn-"] {
+  scroll-margin-top: 110px;
+}
+
 .tocOverlay {
   position: fixed;
   inset: 0;
