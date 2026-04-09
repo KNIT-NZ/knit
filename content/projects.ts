@@ -19,7 +19,14 @@ export const projectLinks: ProjectLink[] = [
     href: "https://tbd.knit.nz",
     enabled: false,
     external: true,
-    description: "Psychometric civic engagement engine.",
+    description: "Integrated policy mapping infrastructure.",
+  },
+    {
+    title: "Liquid Policy Shop",
+    href: "https://tbd.knit.nz",
+    enabled: false,
+    external: true,
+    description: "Public, blockchain-backed platform for the collaborative development, refinement, and critique of laws and policies.",
   },
   {
     title: "Projects",
