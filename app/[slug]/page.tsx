@@ -1,3 +1,4 @@
+// app/[slug]/page.tsx
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import TopBar from "@/components/TopBar";
@@ -8,7 +9,7 @@ export function generateStaticParams() {
   return getSectionSlugs().map((slug) => ({ slug }));
 }
 
-export default async function ReadPage({
+export default async function SectionPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
@@ -24,12 +25,14 @@ export default async function ReadPage({
   return (
     <>
       <TopBar
-        centerLabel={section.part || section.title}
+        topLabel={section.part || undefined}
+        bottomLabel={section.title}
+        currentSlug={slug}
         rightSlot={<TocOverlay currentSlug={slug} />}
       />
 
       <main className="readingShell">
-        <article className="readingArticle readingArticleCentered">
+        <article className="readingArticleCentered">
           <header className="readingHeader">
             <h1>{section.title}</h1>
             {section.description ? (
@@ -44,14 +47,14 @@ export default async function ReadPage({
           <footer className="readingFooter">
             <div>
               {prev ? (
-                <Link href={`/read/${prev.slug}`} className="navPrev">
+                <Link href={`/${prev.slug}`} className="navPrev">
                   ← {prev.title}
                 </Link>
               ) : null}
             </div>
             <div>
               {next ? (
-                <Link href={`/read/${next.slug}`} className="navNext">
+                <Link href={`/${next.slug}`} className="navNext">
                   {next.title} →
                 </Link>
               ) : null}

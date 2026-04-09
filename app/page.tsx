@@ -7,23 +7,22 @@ const projectLinks = [
   {
     title: "Open Order",
     href: "https://open-order.knit.nz",
-    note: "Real-time participatory policy system",
-    badge: "Live",
+    enabled: true,
   },
   {
     title: "Swive",
     href: "https://swive.knit.nz",
-    note: "Psychometric civic engagement engine",
-  },
-  {
-    title: "Book",
-    href: "/read/preamble",
-    note: "Start with the doctrine",
+    enabled: false,
   },
   {
     title: "Projects",
     href: "/projects",
-    note: "See the ecosystem",
+    enabled: true,
+  },
+  {
+    title: "Archive",
+    href: "/archive",
+    enabled: false,
   },
 ];
 
@@ -32,7 +31,7 @@ export default function HomePage() {
 
   return (
     <>
-      <TopBar centerLabel="KNIT" />
+      <TopBar />
 
       <main className="homeShell">
         <aside className="homeSidebar">
@@ -47,22 +46,28 @@ export default function HomePage() {
           </div>
 
           <div className="projectRail">
-            {projectLinks.map((item) => (
-              <a
-                key={item.title}
-                href={item.href}
-                className="projectRailItem"
-                target={item.href.startsWith("http") ? "_blank" : undefined}
-                rel={item.href.startsWith("http") ? "noreferrer" : undefined}
-              >
-                <div className="projectRailMain">
-                  <span className="projectRailTitle">{item.title}</span>
-                  <ArrowUpRight size={16} />
+            {projectLinks.map((item) =>
+              item.enabled ? (
+                <a
+                  key={item.title}
+                  href={item.href}
+                  className="projectRailItem"
+                  target={item.href.startsWith("http") ? "_blank" : undefined}
+                  rel={item.href.startsWith("http") ? "noreferrer" : undefined}
+                >
+                  <span className="projectRailLabel">{item.title}</span>
+                  <ArrowUpRight size={15} />
+                </a>
+              ) : (
+                <div
+                  key={item.title}
+                  className="projectRailItem disabled"
+                  aria-disabled="true"
+                >
+                  <span className="projectRailLabel">{item.title}</span>
                 </div>
-                {item.badge ? <span className="projectBadge">{item.badge}</span> : null}
-                <div className="projectRailNote">{item.note}</div>
-              </a>
-            ))}
+              )
+            )}
           </div>
         </aside>
 
@@ -86,7 +91,7 @@ export default function HomePage() {
 
                 <div className="tocGroupList">
                   {items.map((item) => (
-                    <Link key={item.slug} href={`/read/${item.slug}`} className="tocRow">
+                    <Link key={item.slug} href={`/${item.slug}`} className="tocRow">
                       <div className="tocRowIcon">
                         <ArrowUpRight size={16} />
                       </div>

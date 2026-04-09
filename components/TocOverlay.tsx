@@ -1,6 +1,7 @@
+// components/TocOverlay.tsx
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { manifest } from "@/content/manifest";
@@ -15,9 +16,7 @@ export default function TocOverlay({
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setOpen(false);
-      }
+      if (event.key === "Escape") setOpen(false);
     };
 
     window.addEventListener("keydown", onKeyDown);
@@ -31,7 +30,18 @@ export default function TocOverlay({
     };
   }, [open]);
 
-  const grouped = groupManifest();
+  const grouped = useMemo(() => {
+    const sorted = [...manifest].sort((a, b) => a.order - b.order);
+    const map = new Map<string, typeof sorted>();
+
+    for (const item of sorted) {
+      const key = item.part || "";
+      if (!map.has(key)) map.set(key, []);
+      map.get(key)!.push(item);
+    }
+
+    return Array.from(map.entries());
+  }, []);
 
   return (
     <>
@@ -62,19 +72,25 @@ export default function TocOverlay({
 
           <div className="tocOverlayBody">
             {grouped.map(([part, items], index) => (
-              <section key={part || index} className="tocOverlaySection">
+              <section key={`${part}-${index}`} className="tocOverlaySection">
                 {part ? <div className="tocOverlayPart">{part}</div> : null}
+
                 <div className="tocOverlayList">
                   {items.map((item) => (
                     <Link
                       key={item.slug}
-                      href={`/read/${item.slug}`}
+                      href={`/${item.slug}`}
                       className={clsx("tocOverlayItem", {
                         active: item.slug === currentSlug,
                       })}
                       onClick={() => setOpen(false)}
                     >
-                      <span>{item.title}</span>
+                      <span className="tocOverlayItemTitle">{item.title}</span>
+                      {item.description ? (
+                        <span className="tocOverlayItemDescription">
+                          {item.description}
+                        </span>
+                      ) : null}
                     </Link>
                   ))}
                 </div>
@@ -85,17 +101,4 @@ export default function TocOverlay({
       </div>
     </>
   );
-}
-
-function groupManifest() {
-  const sorted = [...manifest].sort((a, b) => a.order - b.order);
-  const grouped = new Map<string, typeof sorted>();
-
-  for (const item of sorted) {
-    const key = item.part || "";
-    if (!grouped.has(key)) grouped.set(key, []);
-    grouped.get(key)!.push(item);
-  }
-
-  return Array.from(grouped.entries());
 }

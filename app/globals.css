@@ -84,59 +84,60 @@ button {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  min-height: 40px;
 }
 
-.brandMark {
-  width: 28px;
-  height: 28px;
-  border: 1px solid var(--accent);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+.brandLogo {
+  width: auto;
+  height: 34px;
+  object-fit: contain;
+}
+
+.topBarTopLabel {
   font-family: var(--sans);
   font-size: 14px;
-  line-height: 1;
-}
-
-.brandText {
-  font-size: 28px;
-  line-height: 1;
-  letter-spacing: -0.03em;
+  line-height: 1.1;
+  font-weight: 700;
+  margin-bottom: 4px;
+  text-align: center;
   white-space: nowrap;
 }
 
-.topBarLabel {
+.topBarBottomLabel {
   font-family: var(--sans);
-  font-size: 14px;
-  line-height: 1.2;
+  font-size: 17px;
+  line-height: 1.15;
   font-weight: 600;
-  color: rgba(22, 22, 22, 0.78);
+  color: rgba(22, 22, 22, 0.72);
   margin-bottom: 10px;
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  max-width: 100%;
 }
 
-.progressMeter {
+.bookProgress {
   width: 100%;
+  display: grid;
+  grid-template-columns: repeat(var(--progress-segments, 1), 1fr);
+  gap: 16px;
+}
+
+.bookProgressSegment {
+  position: relative;
   height: 6px;
-  display: flex;
-  align-items: center;
-  background: transparent;
-}
-
-.progressMeter::before {
-  content: "";
-  position: absolute;
-}
-
-.progressMeterFill {
-  height: 4px;
   border-radius: 999px;
-  background: rgba(22, 22, 22, 0.26);
-  transition: width 0.08s linear;
+  background: rgba(22, 22, 22, 0.11);
+  overflow: hidden;
+}
+
+.bookProgressSegmentFill {
+  position: absolute;
+  inset: 0;
+  background: rgba(22, 22, 22, 0.3);
+  transform-origin: left center;
+  transition: transform 0.08s linear;
 }
 
 .menuButton {
@@ -172,7 +173,7 @@ button {
 }
 
 .homeSidebarCard {
-  margin-bottom: 32px;
+  margin-bottom: 28px;
 }
 
 .homeSidebarEyebrow,
@@ -203,19 +204,15 @@ button {
 
 .projectRail {
   display: grid;
-  gap: 12px;
+  gap: 10px;
 }
 
 .projectRailItem {
-  position: relative;
-  display: block;
+  min-height: 54px;
   border: 1px solid var(--line-strong);
   border-radius: 999px;
-  padding: 16px 18px;
-  background: rgba(255, 255, 255, 0.28);
-}
-
-.projectRailMain {
+  padding: 0 18px;
+  background: rgba(255, 255, 255, 0.22);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -225,31 +222,16 @@ button {
   font-weight: 600;
 }
 
-.projectRailTitle {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
+.projectRailItem.disabled {
+  color: rgba(22, 22, 22, 0.42);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(22, 22, 22, 0.1);
+  cursor: default;
+  pointer-events: none;
 }
 
-.projectRailNote {
-  margin-top: 6px;
-  font-family: var(--sans);
-  font-size: 13px;
-  line-height: 1.45;
-  color: var(--muted);
-}
-
-.projectBadge {
-  display: inline-block;
-  margin-top: 8px;
-  padding: 3px 8px;
-  border-radius: 999px;
-  background: #1f6fff;
-  color: white;
-  font-family: var(--sans);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.02em;
+.projectRailLabel {
+  white-space: nowrap;
 }
 
 .homeMain {
@@ -476,6 +458,7 @@ button {
   position: absolute;
   inset: 0;
   background: rgba(22, 22, 22, 0.22);
+  z-index: 0;
 }
 
 .tocOverlayPanel {
@@ -490,6 +473,7 @@ button {
   transition: transform 0.2s ease;
   display: flex;
   flex-direction: column;
+  z-index: 1;
 }
 
 .tocOverlay.open .tocOverlayPanel {
@@ -528,12 +512,25 @@ button {
   display: block;
   padding: 14px 0;
   border-bottom: 1px solid var(--line);
-  font-family: var(--sans);
-  font-size: 17px;
-  line-height: 1.4;
 }
 
-.tocOverlayItem.active {
+.tocOverlayItemTitle {
+  display: block;
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.35;
+}
+
+.tocOverlayItemDescription {
+  display: block;
+  margin-top: 4px;
+  font-family: var(--sans);
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.tocOverlayItem.active .tocOverlayItemTitle {
   font-weight: 700;
 }
 
@@ -609,10 +606,6 @@ button {
     display: none;
   }
 
-  .brandText {
-    font-size: 24px;
-  }
-
   .readingHeader h1 {
     font-size: clamp(44px, 12vw, 60px);
   }
@@ -630,6 +623,10 @@ button {
 
   .tocRow {
     grid-template-columns: 44px minmax(0, 1fr);
+  }
+
+  .brandLogo {
+    height: 28px;
   }
 }
 

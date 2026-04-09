@@ -3,7 +3,7 @@ import TopBar from "@/components/TopBar";
 export default function ProjectsPage() {
   return (
     <>
-      <TopBar centerLabel="Projects" />
+      <TopBar topLabel="KNIT" bottomLabel="Projects" />
 
       <main className="standardPage">
         <div className="standardPageInner">
@@ -15,7 +15,7 @@ export default function ProjectsPage() {
 
           <div className="projectPageList">
             <a
-              href="https://openorder.knit.nz"
+              href="https://open-order.knit.nz"
               target="_blank"
               rel="noreferrer"
               className="projectPageCard"

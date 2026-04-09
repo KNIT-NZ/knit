@@ -1,28 +1,42 @@
 import Link from "next/link";
+import Image from "next/image";
 import ProgressBar from "@/components/ProgressBar";
 
 export default function TopBar({
-  centerLabel,
+  topLabel,
+  bottomLabel,
+  currentSlug,
   rightSlot,
+  logoSrc = "/logo-horizontal.png",
+  logoAlt = "KNIT",
 }: {
-  centerLabel?: string;
+  topLabel?: string;
+  bottomLabel?: string;
+  currentSlug?: string;
   rightSlot?: React.ReactNode;
+  logoSrc?: string;
+  logoAlt?: string;
 }) {
   return (
     <header className="topBar">
       <div className="topBarInner">
         <div className="topBarLeft">
-          <Link href="/" className="brand">
-            <span className="brandMark" aria-hidden="true">
-              ✦
-            </span>
-            <span className="brandText">KNIT</span>
+          <Link href="/" className="brand" aria-label="KNIT home">
+            <Image
+              src={logoSrc}
+              alt={logoAlt}
+              width={260}
+              height={40}
+              className="brandLogo"
+              priority
+            />
           </Link>
         </div>
 
         <div className="topBarCenter">
-          {centerLabel ? <div className="topBarLabel">{centerLabel}</div> : null}
-          <ProgressBar />
+          {topLabel ? <div className="topBarTopLabel">{topLabel}</div> : null}
+          {bottomLabel ? <div className="topBarBottomLabel">{bottomLabel}</div> : null}
+          <ProgressBar currentSlug={currentSlug} />
         </div>
 
         <div className="topBarRight">{rightSlot}</div>
