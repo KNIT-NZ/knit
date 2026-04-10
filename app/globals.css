@@ -1,3 +1,4 @@
+/* app/globals.css */
 :root {
   --bg: #f5f3ef;
   --paper: #fbfaf7;
@@ -567,6 +568,7 @@ button {
 
 .nextSectionBar {
   margin-top: 40px;
+  padding: 0 20px;
 }
 
 .nextSectionBarInner {
@@ -745,6 +747,12 @@ button {
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .nextSectionMeta {
+    width: 100%;
   }
 
   .nextSectionButton {
@@ -757,7 +765,8 @@ button {
 @media (max-width: 640px) {
   .homeShell,
   .readingShell,
-  .standardPage {
+  .standardPage,
+  .nextSectionBar {
     padding-left: 16px;
     padding-right: 16px;
   }

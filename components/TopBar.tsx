@@ -1,3 +1,4 @@
+// components/TopBar.tsx
 import Link from "next/link";
 import Image from "next/image";
 import ProgressBar, { ProgressPart } from "@/components/ProgressBar";
