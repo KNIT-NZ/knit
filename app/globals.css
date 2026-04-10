@@ -87,7 +87,8 @@ button {
 }
 
 .brandLogo {
-  width: auto;
+  display: block;
+  width: 221px;
   height: 34px;
   object-fit: contain;
 }
@@ -738,6 +739,7 @@ button {
   }
 
   .brandLogo {
+    width: 182px;
     height: 28px;
   }
 }

@@ -2,6 +2,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { manifest } from "@/content/manifest";
@@ -14,11 +15,7 @@ type PartGroup = {
   items: ManifestItem[];
 };
 
-export default function TocOverlay({
-  currentSlug,
-}: {
-  currentSlug?: string;
-}) {
+export default function TocOverlay({ currentSlug }: { currentSlug?: string }) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -36,6 +33,12 @@ export default function TocOverlay({
       document.body.style.overflow = "";
     };
   }, [open]);
+
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   const groups = useMemo<PartGroup[]>(() => {
     const sorted = [...manifest].sort((a, b) => a.order - b.order);
@@ -96,11 +99,14 @@ export default function TocOverlay({
               {groups.map((group, groupIndex) => {
                 const firstItem = group.items[0];
                 const partIsActive = group.items.some(
-                  (item) => item.slug === currentSlug
+                  (item) => item.slug === currentSlug,
                 );
 
                 return (
-                  <section key={`${group.part}-${groupIndex}`} className="tocOverlayGroup">
+                  <section
+                    key={`${group.part}-${groupIndex}`}
+                    className="tocOverlayGroup"
+                  >
                     <Link
                       href={`/${firstItem.slug}`}
                       scroll
@@ -109,7 +115,9 @@ export default function TocOverlay({
                       })}
                       onClick={() => setOpen(false)}
                     >
-                      <span className="tocOverlayGroupIndex">{groupIndex + 1}</span>
+                      <span className="tocOverlayGroupIndex">
+                        {groupIndex + 1}
+                      </span>
                       <span className="tocOverlayGroupTitle">{group.part}</span>
                       <span className="tocOverlayGroupIcon">
                         <ArrowUpRight size={14} />
@@ -127,7 +135,9 @@ export default function TocOverlay({
                           })}
                           onClick={() => setOpen(false)}
                         >
-                          <span className="tocOverlayItemTitle">{item.title}</span>
+                          <span className="tocOverlayItemTitle">
+                            {item.title}
+                          </span>
 
                           <span className="tocOverlayItemIcon">
                             <ArrowUpRight size={14} />

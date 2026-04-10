@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { notFound } from "next/navigation";
+import RouteScrollReset from "@/components/RouteScrollReset";
 import TopBar from "@/components/TopBar";
 import TocOverlay from "@/components/TocOverlay";
 import {
@@ -31,6 +32,7 @@ export default async function SectionPage({
 
   return (
     <>
+      <RouteScrollReset />
       <TopBar
         topLabel={section.part || undefined}
         bottomLabel={section.title}
