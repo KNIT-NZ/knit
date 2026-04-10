@@ -2,7 +2,6 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import SectionNavLink from "@/components/SectionNavLink";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { manifest } from "@/content/manifest";
 import { clsx } from "clsx";
@@ -100,12 +99,17 @@ export default function TocOverlay({ currentSlug }: { currentSlug?: string }) {
                     key={`${group.part}-${groupIndex}`}
                     className="tocOverlayGroup"
                   >
-                    <SectionNavLink
+                    <a
                       href={`/${firstItem.slug}`}
                       className={clsx("tocOverlayGroupHeading", {
                         active: partIsActive,
                       })}
-                      onBeforeNavigate={() => setOpen(false)}
+                      onClick={() => {
+                        setOpen(false);
+                        if (document.activeElement instanceof HTMLElement) {
+                          document.activeElement.blur();
+                        }
+                      }}
                     >
                       <span className="tocOverlayGroupIndex">
                         {groupIndex + 1}
@@ -114,17 +118,22 @@ export default function TocOverlay({ currentSlug }: { currentSlug?: string }) {
                       <span className="tocOverlayGroupIcon">
                         <ArrowUpRight size={14} />
                       </span>
-                    </SectionNavLink>
+                    </a>
 
                     <nav className="tocOverlayList">
                       {group.items.map((item) => (
-                        <SectionNavLink
+                        <a
                           key={item.slug}
                           href={`/${item.slug}`}
                           className={clsx("tocOverlayItem", {
                             active: item.slug === currentSlug,
                           })}
-                          onBeforeNavigate={() => setOpen(false)}
+                          onClick={() => {
+                            setOpen(false);
+                            if (document.activeElement instanceof HTMLElement) {
+                              document.activeElement.blur();
+                            }
+                          }}
                         >
                           <span className="tocOverlayItemTitle">
                             {item.title}
@@ -133,7 +142,7 @@ export default function TocOverlay({ currentSlug }: { currentSlug?: string }) {
                           <span className="tocOverlayItemIcon">
                             <ArrowUpRight size={14} />
                           </span>
-                        </SectionNavLink>
+                        </a>
                       ))}
                     </nav>
                   </section>

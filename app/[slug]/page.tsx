@@ -1,5 +1,4 @@
 // app/[slug]/page.tsx
-import SectionNavLink from "@/components/SectionNavLink";
 import { ChevronRight } from "lucide-react";
 import { notFound } from "next/navigation";
 import TopBar from "@/components/TopBar";
@@ -59,13 +58,10 @@ export default async function SectionPage({
               <div className="nextSectionTitle">{next.title}</div>
             </div>
 
-            <SectionNavLink
-              href={`/${next.slug}`}
-              className="nextSectionButton"
-            >
+            <a href={`/${next.slug}`} className="nextSectionButton">
               <span>Next</span>
               <ChevronRight size={16} />
-            </SectionNavLink>
+            </a>
           </div>
         </section>
       ) : null}

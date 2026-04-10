@@ -1,4 +1,4 @@
-import Link from "next/link";
+// app/page.tsx
 import { ArrowUpRight } from "lucide-react";
 import TopBar from "@/components/TopBar";
 import { manifest } from "@/content/manifest";
@@ -99,10 +99,9 @@ export default function HomePage() {
 
                 <div className="tocGroupList">
                   {items.map((item) => (
-                    <Link
+                    <a
                       key={item.slug}
                       href={`/${item.slug}`}
-                      scroll
                       className="tocRow"
                     >
                       <div className="tocRowIcon">
@@ -111,7 +110,7 @@ export default function HomePage() {
                       <div className="tocRowBody">
                         <div className="tocRowTitle">{item.title}</div>
                       </div>
-                    </Link>
+                    </a>
                   ))}
                 </div>
               </section>
