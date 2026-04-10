@@ -1,8 +1,7 @@
 // app/[slug]/page.tsx
-import Link from "next/link";
+import SectionNavLink from "@/components/SectionNavLink";
 import { ChevronRight } from "lucide-react";
 import { notFound } from "next/navigation";
-import RouteScrollReset from "@/components/RouteScrollReset";
 import TopBar from "@/components/TopBar";
 import TocOverlay from "@/components/TocOverlay";
 import {
@@ -32,7 +31,6 @@ export default async function SectionPage({
 
   return (
     <>
-      <RouteScrollReset />
       <TopBar
         topLabel={section.part || undefined}
         bottomLabel={section.title}
@@ -61,10 +59,13 @@ export default async function SectionPage({
               <div className="nextSectionTitle">{next.title}</div>
             </div>
 
-            <Link href={`/${next.slug}`} scroll className="nextSectionButton">
+            <SectionNavLink
+              href={`/${next.slug}`}
+              className="nextSectionButton"
+            >
               <span>Next</span>
               <ChevronRight size={16} />
-            </Link>
+            </SectionNavLink>
           </div>
         </section>
       ) : null}

@@ -2,8 +2,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
+import SectionNavLink from "@/components/SectionNavLink";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { manifest } from "@/content/manifest";
 import { clsx } from "clsx";
@@ -33,12 +32,6 @@ export default function TocOverlay({ currentSlug }: { currentSlug?: string }) {
       document.body.style.overflow = "";
     };
   }, [open]);
-
-  const pathname = usePathname();
-
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
 
   const groups = useMemo<PartGroup[]>(() => {
     const sorted = [...manifest].sort((a, b) => a.order - b.order);
@@ -107,13 +100,12 @@ export default function TocOverlay({ currentSlug }: { currentSlug?: string }) {
                     key={`${group.part}-${groupIndex}`}
                     className="tocOverlayGroup"
                   >
-                    <Link
+                    <SectionNavLink
                       href={`/${firstItem.slug}`}
-                      scroll
                       className={clsx("tocOverlayGroupHeading", {
                         active: partIsActive,
                       })}
-                      onClick={() => setOpen(false)}
+                      onBeforeNavigate={() => setOpen(false)}
                     >
                       <span className="tocOverlayGroupIndex">
                         {groupIndex + 1}
@@ -122,18 +114,17 @@ export default function TocOverlay({ currentSlug }: { currentSlug?: string }) {
                       <span className="tocOverlayGroupIcon">
                         <ArrowUpRight size={14} />
                       </span>
-                    </Link>
+                    </SectionNavLink>
 
                     <nav className="tocOverlayList">
                       {group.items.map((item) => (
-                        <Link
+                        <SectionNavLink
                           key={item.slug}
                           href={`/${item.slug}`}
-                          scroll
                           className={clsx("tocOverlayItem", {
                             active: item.slug === currentSlug,
                           })}
-                          onClick={() => setOpen(false)}
+                          onBeforeNavigate={() => setOpen(false)}
                         >
                           <span className="tocOverlayItemTitle">
                             {item.title}
@@ -142,7 +133,7 @@ export default function TocOverlay({ currentSlug }: { currentSlug?: string }) {
                           <span className="tocOverlayItemIcon">
                             <ArrowUpRight size={14} />
                           </span>
-                        </Link>
+                        </SectionNavLink>
                       ))}
                     </nav>
                   </section>
