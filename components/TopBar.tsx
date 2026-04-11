@@ -1,4 +1,3 @@
-// components/TopBar.tsx
 import Link from "next/link";
 import ProgressBar, { ProgressPart } from "@/components/ProgressBar";
 
@@ -10,6 +9,8 @@ export default function TopBar({
   rightSlot,
   logoSrc = "/logo-horizontal.png",
   logoAlt = "KNIT",
+  mobileLogoSrc = "/logo-square.png",
+  mobileLogoAlt = "KNIT",
 }: {
   topLabel?: string;
   bottomLabel?: string;
@@ -18,18 +19,32 @@ export default function TopBar({
   rightSlot?: React.ReactNode;
   logoSrc?: string;
   logoAlt?: string;
+  mobileLogoSrc?: string;
+  mobileLogoAlt?: string;
 }) {
   return (
     <header className="topBar">
       <div className="topBarInner">
         <div className="topBarLeft">
-          <Link href="/" className="brand" aria-label="KNIT home">
+          <Link href="/" className="brand brandDesktop" aria-label="KNIT home">
             <img
               src={logoSrc}
               alt={logoAlt}
               width={1623}
               height={614}
               className="brandLogo"
+              decoding="async"
+              fetchPriority="high"
+            />
+          </Link>
+
+          <Link href="/" className="brand brandMobile" aria-label="KNIT home">
+            <img
+              src={mobileLogoSrc}
+              alt={mobileLogoAlt}
+              width={512}
+              height={512}
+              className="brandLogoSquare"
               decoding="async"
               fetchPriority="high"
             />
@@ -41,10 +56,13 @@ export default function TopBar({
           {bottomLabel ? (
             <div className="topBarBottomLabel">{bottomLabel}</div>
           ) : null}
-          <ProgressBar currentSlug={currentSlug} parts={progressParts} />
         </div>
 
         <div className="topBarRight">{rightSlot}</div>
+      </div>
+
+      <div className="topBarProgress">
+        <ProgressBar currentSlug={currentSlug} parts={progressParts} />
       </div>
     </header>
   );

@@ -87,11 +87,25 @@ button {
   min-height: 40px;
 }
 
+.brandDesktop {
+  display: inline-flex;
+}
+
+.brandMobile {
+  display: none;
+}
+
 .brandLogo {
   display: block;
   height: 34px;
   width: auto;
   max-width: none;
+}
+
+.brandLogoSquare {
+  display: block;
+  width: 32px;
+  height: 32px;
 }
 
 .topBarTopLabel {
@@ -140,6 +154,20 @@ button {
   background: rgba(22, 22, 22, 0.3);
   transform-origin: left center;
   transition: transform 0.08s linear;
+}
+
+.topBarProgress {
+  max-width: 1680px;
+  margin: 0 auto;
+  padding: 0 20px 10px;
+}
+
+.topBarProgress .bookProgress {
+  gap: 14px;
+}
+
+.topBarProgress .bookProgressSegment {
+  height: 6px;
 }
 
 .menuButton {
@@ -724,15 +752,80 @@ button {
 }
 
 @media (max-width: 820px) {
+  .topBar {
+    border-bottom: 0;
+  }
+
   .topBarInner {
-    grid-template-columns: 1fr auto;
-    gap: 16px;
+    grid-template-columns: 40px minmax(0, 1fr) 44px;
+    gap: 12px;
+    min-height: 64px;
     padding-left: 12px;
     padding-right: 12px;
   }
 
+  .topBarLeft {
+    justify-content: flex-start;
+  }
+
   .topBarCenter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .topBarRight {
+    justify-content: flex-end;
+  }
+
+  .brandDesktop {
     display: none;
+  }
+
+  .brandMobile {
+    display: inline-flex;
+  }
+
+  .brandLogoSquare {
+    width: 32px;
+    height: 32px;
+  }
+
+  .topBarTopLabel {
+    margin-bottom: 3px;
+    font-size: 10px;
+    line-height: 1.1;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .topBarBottomLabel {
+    margin-bottom: 0;
+    font-size: 12px;
+    line-height: 1.15;
+    max-width: 100%;
+  }
+
+  .topBarProgress {
+    padding: 0 12px 8px;
+  }
+
+  .topBarProgress .bookProgress {
+    gap: 8px;
+  }
+
+  .topBarProgress .bookProgressSegment {
+    height: 4px;
+    border-radius: 999px;
+  }
+
+  .menuButton {
+    width: 40px;
+    height: 40px;
   }
 
   .readingHeader h1 {
@@ -748,10 +841,6 @@ button {
 
   .tocRow {
     grid-template-columns: 44px minmax(0, 1fr);
-  }
-
-  .brandLogo {
-    height: 28px;
   }
 }
 
