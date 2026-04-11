@@ -1,6 +1,5 @@
 // components/TopBar.tsx
 import Link from "next/link";
-import Image from "next/image";
 import ProgressBar, { ProgressPart } from "@/components/ProgressBar";
 
 export default function TopBar({
@@ -25,16 +24,15 @@ export default function TopBar({
       <div className="topBarInner">
         <div className="topBarLeft">
           <Link href="/" className="brand" aria-label="KNIT home">
-            <span className="brandLogoFrame">
-              <Image
-                src={logoSrc}
-                alt={logoAlt}
-                width={260}
-                height={40}
-                className="brandLogo"
-                priority
-              />
-            </span>
+            <img
+              src={logoSrc}
+              alt={logoAlt}
+              width={260}
+              height={40}
+              className="brandLogo"
+              decoding="async"
+              fetchPriority="high"
+            />
           </Link>
         </div>
 
