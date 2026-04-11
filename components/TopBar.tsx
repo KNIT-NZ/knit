@@ -27,8 +27,8 @@ export default function TopBar({
             <img
               src={logoSrc}
               alt={logoAlt}
-              width={260}
-              height={40}
+              width={1623}
+              height={614}
               className="brandLogo"
               decoding="async"
               fetchPriority="high"

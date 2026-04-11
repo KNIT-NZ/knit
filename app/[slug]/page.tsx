@@ -38,33 +38,35 @@ export default async function SectionPage({
         rightSlot={<TocOverlay currentSlug={slug} />}
       />
 
-      <main className="readingShell">
-        <article className="readingArticleCentered">
-          <header className="readingHeader">
-            <h1>{section.title}</h1>
-          </header>
+      <div className="readingPage">
+        <main className="readingShell">
+          <article className="readingArticleCentered">
+            <header className="readingHeader">
+              <h1>{section.title}</h1>
+            </header>
 
-          <div className="proseShell">
-            <MDXContent />
-          </div>
-        </article>
-      </main>
-
-      {next ? (
-        <section className="nextSectionBar">
-          <div className="nextSectionBarInner">
-            <div className="nextSectionMeta">
-              <div className="nextSectionLabel">Next Section:</div>
-              <div className="nextSectionTitle">{next.title}</div>
+            <div className="proseShell">
+              <MDXContent />
             </div>
+          </article>
+        </main>
 
-            <a href={`/${next.slug}`} className="nextSectionButton">
-              <span>Next</span>
-              <ChevronRight size={16} />
-            </a>
-          </div>
-        </section>
-      ) : null}
+        {next ? (
+          <section className="nextSectionBar">
+            <div className="nextSectionBarInner">
+              <div className="nextSectionMeta">
+                <div className="nextSectionLabel">Next Section:</div>
+                <div className="nextSectionTitle">{next.title}</div>
+              </div>
+
+              <a href={`/${next.slug}`} className="nextSectionButton">
+                <span>Next</span>
+                <ChevronRight size={16} />
+              </a>
+            </div>
+          </section>
+        ) : null}
+      </div>
     </>
   );
 }
