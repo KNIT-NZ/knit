@@ -785,7 +785,7 @@ button {
   }
 
   .readingShell {
-    padding-bottom: 20px;
+    padding-bottom: clamp(20px, 6vh, 56px);
   }
 
   .nextSectionBar {
