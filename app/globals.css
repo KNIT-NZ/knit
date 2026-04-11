@@ -86,9 +86,18 @@ button {
   min-height: 40px;
 }
 
-.brandLogo {
-  width: auto;
+.brandLogoFrame {
+  display: block;
+  width: 221px;
   height: 34px;
+  overflow: hidden;
+  flex: 0 0 auto;
+}
+
+.brandLogo {
+  display: block;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
 }
 
@@ -301,8 +310,15 @@ button {
   line-height: 1.3;
 }
 
+.readingPage {
+  min-height: calc(100svh - 79px);
+  display: flex;
+  flex-direction: column;
+}
+
 .readingShell {
-  padding: 24px 20px 56px;
+  flex: 1 0 auto;
+  padding: 24px 20px 40px;
 }
 
 .readingArticleCentered {
@@ -450,6 +466,7 @@ button {
   flex-direction: column;
   z-index: 1;
   box-shadow: -8px 0 32px rgba(0, 0, 0, 0.06);
+  overscroll-behavior: contain;
 }
 
 .tocOverlay.open .tocOverlayPanel {
@@ -476,6 +493,8 @@ button {
 .tocOverlayBody {
   flex: 1 1 auto;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
   background: var(--paper);
   padding: 8px 20px 28px;
 }
@@ -567,8 +586,8 @@ button {
 }
 
 .nextSectionBar {
-  margin-top: 40px;
-  padding: 0 20px;
+  margin-top: auto;
+  padding: 0 20px 28px;
 }
 
 .nextSectionBarInner {
@@ -737,7 +756,8 @@ button {
     grid-template-columns: 44px minmax(0, 1fr);
   }
 
-  .brandLogo {
+  .brandLogoFrame {
+    width: 182px;
     height: 28px;
   }
 }
@@ -769,6 +789,14 @@ button {
   .nextSectionBar {
     padding-left: 16px;
     padding-right: 16px;
+  }
+
+  .readingShell {
+    padding-bottom: 28px;
+  }
+
+  .nextSectionBar {
+    padding-bottom: 24px;
   }
 
   .homeTitle {

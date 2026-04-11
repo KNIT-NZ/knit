@@ -25,20 +25,24 @@ export default function TopBar({
       <div className="topBarInner">
         <div className="topBarLeft">
           <Link href="/" className="brand" aria-label="KNIT home">
-            <Image
-              src={logoSrc}
-              alt={logoAlt}
-              width={260}
-              height={40}
-              className="brandLogo"
-              priority
-            />
+            <span className="brandLogoFrame">
+              <Image
+                src={logoSrc}
+                alt={logoAlt}
+                width={260}
+                height={40}
+                className="brandLogo"
+                priority
+              />
+            </span>
           </Link>
         </div>
 
         <div className="topBarCenter">
           {topLabel ? <div className="topBarTopLabel">{topLabel}</div> : null}
-          {bottomLabel ? <div className="topBarBottomLabel">{bottomLabel}</div> : null}
+          {bottomLabel ? (
+            <div className="topBarBottomLabel">{bottomLabel}</div>
+          ) : null}
           <ProgressBar currentSlug={currentSlug} parts={progressParts} />
         </div>
 
