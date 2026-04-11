@@ -22,8 +22,10 @@ export default function TopBar({
   mobileLogoSrc?: string;
   mobileLogoAlt?: string;
 }) {
+  const isReadingBar = Boolean(currentSlug);
+
   return (
-    <header className="topBar">
+    <header className={`topBar${isReadingBar ? " isReadingBar" : ""}`}>
       <div className="topBarInner">
         <div className="topBarLeft">
           <Link href="/" className="brand brandDesktop" aria-label="KNIT home">
@@ -38,17 +40,19 @@ export default function TopBar({
             />
           </Link>
 
-          <Link href="/" className="brand brandMobile" aria-label="KNIT home">
-            <img
-              src={mobileLogoSrc}
-              alt={mobileLogoAlt}
-              width={512}
-              height={512}
-              className="brandLogoSquare"
-              decoding="async"
-              fetchPriority="high"
-            />
-          </Link>
+          {isReadingBar ? (
+            <Link href="/" className="brand brandMobile" aria-label="KNIT home">
+              <img
+                src={mobileLogoSrc}
+                alt={mobileLogoAlt}
+                width={512}
+                height={512}
+                className="brandLogoSquare"
+                decoding="async"
+                fetchPriority="high"
+              />
+            </Link>
+          ) : null}
         </div>
 
         <div className="topBarCenter">
@@ -56,13 +60,10 @@ export default function TopBar({
           {bottomLabel ? (
             <div className="topBarBottomLabel">{bottomLabel}</div>
           ) : null}
+          <ProgressBar currentSlug={currentSlug} parts={progressParts} />
         </div>
 
         <div className="topBarRight">{rightSlot}</div>
-      </div>
-
-      <div className="topBarProgress">
-        <ProgressBar currentSlug={currentSlug} parts={progressParts} />
       </div>
     </header>
   );

@@ -156,20 +156,6 @@ button {
   transition: transform 0.08s linear;
 }
 
-.topBarProgress {
-  max-width: 1680px;
-  margin: 0 auto;
-  padding: 0 20px 10px;
-}
-
-.topBarProgress .bookProgress {
-  gap: 14px;
-}
-
-.topBarProgress .bookProgressSegment {
-  height: 6px;
-}
-
 .menuButton {
   width: 44px;
   height: 44px;
@@ -752,16 +738,13 @@ button {
 }
 
 @media (max-width: 820px) {
-  .topBar {
-    border-bottom: 0;
-  }
-
   .topBarInner {
-    grid-template-columns: 40px minmax(0, 1fr) 44px;
+    grid-template-columns: auto minmax(0, 1fr) auto;
     gap: 12px;
     min-height: 64px;
     padding-left: 12px;
     padding-right: 12px;
+    align-items: center;
   }
 
   .topBarLeft {
@@ -770,29 +753,47 @@ button {
 
   .topBarCenter {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
+    min-width: 0;
   }
 
   .topBarRight {
     justify-content: flex-end;
   }
 
-  .brandDesktop {
-    display: none;
-  }
-
-  .brandMobile {
+  .topBar:not(.isReadingBar) .brandDesktop {
     display: inline-flex;
   }
 
-  .brandLogoSquare {
+  .topBar:not(.isReadingBar) .brandMobile {
+    display: none;
+  }
+
+  .topBar:not(.isReadingBar) .topBarCenter {
+    display: none;
+  }
+
+  .topBar.isReadingBar {
+    border-bottom: 0;
+  }
+
+  .topBar.isReadingBar .brandDesktop {
+    display: none;
+  }
+
+  .topBar.isReadingBar .brandMobile {
+    display: inline-flex;
+  }
+
+  .topBar.isReadingBar .brandLogoSquare {
     width: 32px;
     height: 32px;
   }
 
-  .topBarTopLabel {
+  .topBar.isReadingBar .topBarTopLabel {
     margin-bottom: 3px;
     font-size: 10px;
     line-height: 1.1;
@@ -803,24 +804,24 @@ button {
     text-overflow: ellipsis;
   }
 
-  .topBarBottomLabel {
-    margin-bottom: 0;
+  .topBar.isReadingBar .topBarBottomLabel {
+    margin-bottom: 8px;
     font-size: 12px;
     line-height: 1.15;
     max-width: 100%;
   }
 
-  .topBarProgress {
-    padding: 0 12px 8px;
-  }
-
-  .topBarProgress .bookProgress {
+  .topBar.isReadingBar .bookProgress {
     gap: 8px;
   }
 
-  .topBarProgress .bookProgressSegment {
+  .topBar.isReadingBar .bookProgressSegment {
     height: 4px;
     border-radius: 999px;
+  }
+
+  .topBar:not(.isReadingBar) .brandLogo {
+    height: 28px;
   }
 
   .menuButton {
