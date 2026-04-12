@@ -23,28 +23,28 @@ export const manifest: ManifestItem[] = [
   {
     slug: "open-order",
     title: "2026 | Procedural search tool for MPs in the House",
-    part: "ROADMAP 2026-2030",
+    part: "Roadmap 2026-2030",
     order: 4,
     
   },
   {
     slug: "civic-brain",
     title: "2027 | Integrated policy mapping infrastructure",
-    part: "ROADMAP 2026-2030",
+    part: "Roadmap 2026-2030",
     order: 5,
     
   },
    {
     slug: "liquid-policy-shop",
     title: "2029 | Liquid policy shop",
-    part: "ROADMAP 2026-2030",
+    part: "Roadmap 2026-2030",
     order: 6,
     
   },
    {
     slug: "modern-standing-orders",
     title: "2030 | Modern Standing Orders",
-    part: "ROADMAP 2026-2030",
+    part: "Roadmap 2026-2030",
     order: 7,
     
   },
