@@ -50,8 +50,7 @@ export default function HomePage() {
               Towards a digital-first New Zealand Government.
             </h1>
             <p className="homeIntro">
-              We are aiming at healthy and reasoned civic discourse through
-              tools built for the digital age.
+              KNIT is an intervention layer that sits between citizens and formal institutions, designed to incrementally rewire how policy input, deliberation, and decision-making occur.
             </p>
           </div>
 
