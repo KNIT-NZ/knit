@@ -2,7 +2,7 @@ import "./globals.css";
 
 export const metadata = {
   title: "knit",
-  description: "A living doctrine for decentralised democratic infrastructure.",
+  description: "Building tools to incrementally rewire how policy input, deliberation, and decision-making occur.",
 };
 
 export default function RootLayout({
