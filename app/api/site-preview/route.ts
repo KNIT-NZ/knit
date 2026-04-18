@@ -42,8 +42,22 @@ export async function GET(req: NextRequest) {
       },
     });
   } catch (error) {
-    console.error("site-preview failed", error);
-    return new Response("Preview unavailable", { status: 500 });
+    const details =
+      error instanceof Error
+        ? `${error.name}: ${error.message}\n${error.stack ?? ""}`
+        : typeof error === "string"
+          ? error
+          : JSON.stringify(error, null, 2);
+
+    console.error("site-preview failed\n", details);
+
+    return new Response(details, {
+      status: 500,
+      headers: {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Cache-Control": "no-store",
+      },
+    });
   } finally {
     await browser?.close();
   }
