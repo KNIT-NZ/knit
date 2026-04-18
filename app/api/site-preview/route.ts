@@ -1,6 +1,7 @@
 // app/api/site-preview/route.ts
 import { NextRequest } from "next/server";
-import { chromium } from "playwright";
+import { chromium as playwright } from "playwright-core";
+import chromium from "@sparticuz/chromium";
 
 export const runtime = "nodejs";
 
@@ -13,13 +14,12 @@ export async function GET(req: NextRequest) {
 
   let browser;
   try {
-    browser = await chromium.launch({ headless: true });
-  } catch (error) {
-    console.error("chromium launch failed", error);
-    return new Response("Browser launch failed", { status: 500 });
-  }
+    browser = await playwright.launch({
+      args: chromium.args,
+      executablePath: await chromium.executablePath(),
+      headless: true,
+    });
 
-  try {
     const page = await browser.newPage({
       viewport: { width: 1440, height: 960 },
       deviceScaleFactor: 1,
@@ -30,7 +30,10 @@ export async function GET(req: NextRequest) {
       timeout: 20000,
     });
 
-    const buffer = await page.screenshot({ type: "png", fullPage: false });
+    const buffer = await page.screenshot({
+      type: "png",
+      fullPage: false,
+    });
 
     return new Response(new Uint8Array(buffer), {
       headers: {
@@ -39,8 +42,8 @@ export async function GET(req: NextRequest) {
       },
     });
   } catch (error) {
-    console.error("page capture failed", error);
-    return new Response("Page capture failed", { status: 500 });
+    console.error("site-preview failed", error);
+    return new Response("Preview unavailable", { status: 500 });
   } finally {
     await browser?.close();
   }
