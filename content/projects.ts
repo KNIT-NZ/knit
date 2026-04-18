@@ -8,7 +8,7 @@ export type ProjectLink = {
     owner: string;
     name: string;
   };
-  previewUrl?: string;
+  previewImage?: string;
   summaryHint?: string;
 };
 
@@ -23,7 +23,7 @@ export const projectLinks: ProjectLink[] = [
       owner: "KNIT-NZ",
       name: "open-order",
     },
-    previewUrl: "https://openorder.knit.nz",
+    previewImage: "/project-previews/open-order.png",
     summaryHint: "Launched April 2026",
   },
   {

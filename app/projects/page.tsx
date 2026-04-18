@@ -1,4 +1,3 @@
-// app/projects/page.tsx
 import type { Metadata } from "next";
 import { ArrowUpRight } from "lucide-react";
 import TopBar from "@/components/TopBar";
@@ -58,16 +57,14 @@ export default function ProjectsPage() {
                     {item.repo ? (
                       <ProjectRepoDisclosure
                         repo={item.repo}
-                        previewUrl={item.previewUrl}
+                        previewImage={item.previewImage}
+                        projectHref={item.href}
                         summaryHint={item.summaryHint}
                       />
                     ) : null}
                   </div>
                 ) : (
-                  <div
-                    className="projectPageCard disabled"
-                    aria-disabled="true"
-                  >
+                  <div className="projectPageCard disabled" aria-disabled="true">
                     <div className="projectPageCardTop">
                       <h2>{item.title}</h2>
                     </div>

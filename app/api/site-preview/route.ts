@@ -1,9 +1,11 @@
 // app/api/site-preview/route.ts
 import { NextRequest } from "next/server";
-import { chromium as playwright } from "playwright-core";
-import chromium from "@sparticuz/chromium";
+import puppeteer from "puppeteer-core";
+import chromium from "@sparticuz/chromium-min";
 
 export const runtime = "nodejs";
+
+const CHROMIUM_PACK_URL = process.env.CHROMIUM_PACK_URL!;
 
 export async function GET(req: NextRequest) {
   const target = req.nextUrl.searchParams.get("url");
@@ -14,19 +16,24 @@ export async function GET(req: NextRequest) {
 
   let browser;
   try {
-    browser = await playwright.launch({
-      args: chromium.args,
-      executablePath: await chromium.executablePath(),
-      headless: true,
+    browser = await puppeteer.launch({
+      args: puppeteer.defaultArgs({
+        args: chromium.args,
+        headless: "shell",
+      }),
+      executablePath: await chromium.executablePath(CHROMIUM_PACK_URL),
+      headless: "shell",
+      defaultViewport: {
+        width: 1440,
+        height: 960,
+        deviceScaleFactor: 1,
+      },
     });
 
-    const page = await browser.newPage({
-      viewport: { width: 1440, height: 960 },
-      deviceScaleFactor: 1,
-    });
+    const page = await browser.newPage();
 
     await page.goto(target, {
-      waitUntil: "networkidle",
+      waitUntil: "networkidle2",
       timeout: 20000,
     });
 
@@ -45,9 +52,7 @@ export async function GET(req: NextRequest) {
     const details =
       error instanceof Error
         ? `${error.name}: ${error.message}\n${error.stack ?? ""}`
-        : typeof error === "string"
-          ? error
-          : JSON.stringify(error, null, 2);
+        : JSON.stringify(error, null, 2);
 
     console.error("site-preview failed\n", details);
 

@@ -1,5 +1,5 @@
-// components/ProjectRepoDisclosure.tsx
-import { ArrowUpRight, ChevronDown } from "lucide-react";
+import Image from "next/image";
+import { ChevronDown } from "lucide-react";
 import { getRepoPreview } from "@/lib/github";
 
 type RepoRef = {
@@ -9,7 +9,8 @@ type RepoRef = {
 
 type Props = {
   repo: RepoRef;
-  previewUrl?: string;
+  previewImage?: string;
+  projectHref?: string;
   summaryHint?: string;
   defaultOpen?: boolean;
 };
@@ -69,7 +70,8 @@ function getLanguageColor(name: string, index: number) {
 
 export default async function ProjectRepoDisclosure({
   repo,
-  previewUrl,
+  previewImage,
+  projectHref,
   summaryHint = "Public GitHub repo",
   defaultOpen = false,
 }: Props) {
@@ -85,13 +87,20 @@ export default async function ProjectRepoDisclosure({
     <details className="projectRepoDisclosure" open={defaultOpen}>
       <summary className="projectRepoSummary">
         <span className="projectRepoSummaryLeft">
-          <ChevronDown size={15} className="projectRepoSummaryChevron" />
           <span>Project details</span>
         </span>
-        <span className="projectRepoSummaryHint">{summaryHint}</span>
+
+        <span className="projectRepoSummaryRight">
+          <span className="projectRepoSummaryHint">{summaryHint}</span>
+          <ChevronDown size={15} className="projectRepoSummaryChevron" />
+        </span>
       </summary>
 
-      <div className="projectRepoPanel projectRepoPanelWithPreview">
+      <div
+        className={`projectRepoPanel${
+          previewImage ? " projectRepoPanelWithPreview" : ""
+        }`}
+      >
         <div className="projectRepoPanelMain">
           {preview ? (
             <>
@@ -147,7 +156,7 @@ export default async function ProjectRepoDisclosure({
                         key={lang.name}
                         className="projectRepoLanguagePill"
                         style={{
-                          backgroundColor: `${getLanguageColor(lang.name, index)}14`, // subtle tint
+                          backgroundColor: `${getLanguageColor(lang.name, index)}14`,
                           borderColor: `${getLanguageColor(lang.name, index)}33`,
                         }}
                       >
@@ -167,30 +176,31 @@ export default async function ProjectRepoDisclosure({
               ) : null}
             </>
           ) : (
-            <>
-              <p className="projectRepoExcerpt">
-                Live repository details are not currently available for this
-                project.
-              </p>
-            </>
+            <p className="projectRepoExcerpt">
+              Live repository details are not currently available for this
+              project.
+            </p>
           )}
         </div>
 
-        {previewUrl ? (
+        {previewImage ? (
           <a
-            href={previewUrl}
+            href={projectHref ?? repoUrl}
             target="_blank"
             rel="noreferrer"
             className="projectSitePreviewLink"
             aria-label="Open project preview"
           >
             <div className="projectSitePreviewFrame">
-              <img
-                src={`/api/site-preview?url=${encodeURIComponent(previewUrl)}`}
+              <Image
+                src={previewImage}
                 alt=""
+                width={720}
+                height={540}
                 className="projectSitePreviewImage"
               />
             </div>
+            <div className="projectSitePreviewCaption">Live preview</div>
           </a>
         ) : null}
       </div>
