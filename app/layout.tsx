@@ -1,8 +1,12 @@
+// app/layout.tsx
+import type { Metadata } from "next";
 import "./globals.css";
 
-export const metadata = {
-  title: "knit",
-  description: "Building tools to incrementally rewire how policy input, deliberation, and decision-making occur.",
+export const metadata: Metadata = {
+  title: {
+    default: "knit · Towards a digital-first New Zealand Government",
+    template: "knit · %s",
+  },
 };
 
 export default function RootLayout({

@@ -1,9 +1,15 @@
 export type ProjectLink = {
   title: string;
   href: string;
-  enabled: boolean;
   external?: boolean;
+  enabled: boolean;
   description?: string;
+  repo?: {
+    owner: string;
+    name: string;
+  };
+  previewUrl?: string;
+  summaryHint?: string;
 };
 
 export const projectLinks: ProjectLink[] = [
@@ -13,6 +19,12 @@ export const projectLinks: ProjectLink[] = [
     enabled: true,
     external: true,
     description: "Procedural search and civic Parliamentary infrastructure.",
+    repo: {
+      owner: "KNIT-NZ",
+      name: "open-order",
+    },
+    previewUrl: "https://openorder.knit.nz",
+    summaryHint: "Launched April 2026",
   },
   {
     title: "Civic Brain",
@@ -21,11 +33,12 @@ export const projectLinks: ProjectLink[] = [
     external: true,
     description: "Integrated policy mapping infrastructure.",
   },
-    {
+  {
     title: "Liquid Policy Shop",
     href: "https://tbd.knit.nz",
     enabled: false,
     external: true,
-    description: "Public, blockchain-backed platform for the collaborative development, refinement, and critique of laws and policies.",
+    description:
+      "Public, blockchain-backed platform for the collaborative development, refinement, and critique of laws and policies.",
   },
 ];

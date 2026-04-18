@@ -1,4 +1,5 @@
 // app/[slug]/page.tsx
+import type { Metadata } from "next";
 import { ChevronRight } from "lucide-react";
 import { notFound } from "next/navigation";
 import TopBar from "@/components/TopBar";
@@ -12,6 +13,25 @@ import {
 
 export function generateStaticParams() {
   return getSectionSlugs().map((slug) => ({ slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const section = getSectionBySlug(slug);
+
+  if (!section) {
+    return {
+      title: "Not found",
+    };
+  }
+
+  return {
+    title: section.title,
+  };
 }
 
 export default async function SectionPage({

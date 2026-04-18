@@ -9,30 +9,35 @@ const homeSidebarLinks = [
     href: "/projects",
     enabled: true,
     external: false,
+    kind: "topLevel" as const,
   },
   {
     title: "Open Order",
     href: "https://openorder.knit.nz",
     enabled: true,
     external: true,
+    kind: "project" as const,
   },
   {
     title: "Civic Brain",
     href: "https://tbd.knit.nz",
     enabled: false,
     external: true,
+    kind: "project" as const,
   },
   {
     title: "Liquid Policy Shop",
     href: "https://tbd.knit.nz",
     enabled: false,
     external: true,
+    kind: "project" as const,
   },
   {
-    title: "Archive",
-    href: "/archive",
+    title: "Our Trust",
+    href: "/trust",
     enabled: false,
-    external: false,
+    external: true,
+    kind: "topLevel" as const,
   },
 ];
 
@@ -46,21 +51,25 @@ export default function HomePage() {
       <main className="homeShell">
         <aside className="homeSidebar">
           <div className="homeSidebarCard">
-            <h1 className="homeTitle">
-              Towards a digital-first New Zealand Government.
-            </h1>
             <p className="homeIntro">
-              KNIT is an intervention layer that sits between citizens and formal institutions, designed to incrementally rewire how policy input, deliberation, and decision-making occur.
+              KNIT is an intervention layer that sits between citizens and
+              formal institutions, designed to incrementally rewire how policy
+              input, deliberation, and decision-making occur.
             </p>
           </div>
 
           <div className="projectRail">
-            {homeSidebarLinks.map((item) =>
-              item.enabled ? (
+            {homeSidebarLinks.map((item) => {
+              const kindClass =
+                item.kind === "topLevel"
+                  ? "projectRailItemTopLevel"
+                  : "projectRailItemProject";
+
+              return item.enabled ? (
                 <a
                   key={item.title}
                   href={item.href}
-                  className="projectRailItem"
+                  className={`projectRailItem ${kindClass}`}
                   target={item.external ? "_blank" : undefined}
                   rel={item.external ? "noreferrer" : undefined}
                 >
@@ -70,13 +79,13 @@ export default function HomePage() {
               ) : (
                 <div
                   key={item.title}
-                  className="projectRailItem disabled"
+                  className={`projectRailItem ${kindClass} disabled`}
                   aria-disabled="true"
                 >
                   <span className="projectRailLabel">{item.title}</span>
                 </div>
-              ),
-            )}
+              );
+            })}
           </div>
         </aside>
 
