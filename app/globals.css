@@ -848,7 +848,7 @@ button {
 
 .projectRepoPanelWithPreview {
   grid-template-columns: minmax(0, 1fr) 360px;
-  align-items: stretch;
+  align-items: start;
   gap: 20px;
 }
 
@@ -971,28 +971,23 @@ button {
 
 .projectSitePreviewLink {
   min-width: 0;
-  height: 100%;
   display: grid;
-  grid-template-rows: minmax(0, 1fr) auto;
+  grid-template-rows: auto auto;
   gap: 10px;
-  align-self: stretch;
+  align-self: start;
   color: inherit;
 }
 
 .projectSitePreviewFrame {
-  min-height: 0;
-  height: 100%;
   overflow: hidden;
   border: 1px solid rgba(22, 22, 22, 0.08);
-  background: rgba(255, 255, 255, 0.45);
+  background: transparent;
 }
 
 .projectSitePreviewImage {
   display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center;
+  height: auto;
 }
 
 .projectSitePreviewCaption {
@@ -1028,8 +1023,8 @@ button {
   }
 
   .projectSitePreviewImage {
+    width: 100%;
     height: auto;
-    aspect-ratio: 4 / 3;
   }
 
   .nextSectionBarInner {

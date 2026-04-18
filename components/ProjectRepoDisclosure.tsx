@@ -200,7 +200,6 @@ export default async function ProjectRepoDisclosure({
                 className="projectSitePreviewImage"
               />
             </div>
-            <div className="projectSitePreviewCaption">Live preview</div>
           </a>
         ) : null}
       </div>
