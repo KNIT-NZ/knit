@@ -453,6 +453,7 @@ button {
 }
 
 .footnotesSection h2 {
+  font-size: 18px;
   margin-top: 0;
 }
 
@@ -462,6 +463,20 @@ button {
 
 .footnotesList li {
   margin-bottom: 1em;
+}
+
+.footnotesSection {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.footnotesList li {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.footnotesList p {
+  margin: 0;
 }
 
 .footnoteBacklink {
