@@ -365,7 +365,7 @@ button {
 
 .readingHeader h1 {
   margin: 0;
-  font-size: clamp(36px, 4.8vw, 52px);
+  font-size: clamp(32px, 4.4vw, 46px);
   line-height: 0.99;
   letter-spacing: -0.02em;
   font-weight: 500;
@@ -453,7 +453,7 @@ button {
 }
 
 .footnotesSection h2 {
-  font-size: 18px;
+  font-size: 20px;
   margin-top: 0;
 }
 
@@ -466,12 +466,12 @@ button {
 }
 
 .footnotesSection {
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.5;
 }
 
 .footnotesList li {
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.5;
 }
 
@@ -1177,6 +1177,24 @@ button {
   .proseShell blockquote {
     font-size: 17px;
     line-height: 1.44;
+  }
+
+  .footnotesSection {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .footnotesList li {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .footnotesList {
+    padding-left: 1.1em;
+  }
+
+  .footnoteRef {
+    font-size: 0.55em;
   }
 
   .tocRow {
