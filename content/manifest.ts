@@ -2,8 +2,8 @@ import { ManifestItem } from "@/lib/types";
 
 export const manifest: ManifestItem[] = [
   {
-    slug: "burning-the-dead-wood",
-    title: "Burning the Dead Wood",
+    slug: "a-new-container",
+    title: "A New Container",
     part: "Changing the Substrate",
     order: 1,
   },
@@ -29,14 +29,14 @@ export const manifest: ManifestItem[] = [
   },
   {
     slug: "civic-brain",
-    title: "2027 | Integrated Policy Mapping Infrastructure",
+    title: "2028 | Integrated Policy Mapping Infrastructure",
     part: "Roadmap 2026-2030",
     order: 5,
     
   },
    {
     slug: "liquid-policy-shop",
-    title: "2029 | Liquid Policy Shop",
+    title: "2030 | Liquid Policy Shop",
     part: "Roadmap 2026-2030",
     order: 6,
     
