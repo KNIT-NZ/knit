@@ -29,7 +29,7 @@ export const manifest: ManifestItem[] = [
   },
   {
     slug: "civic-brain",
-    title: "2028 | Integrated Policy Mapping Infrastructure",
+    title: "2028 | Integrated Policy Mapping",
     part: "Roadmap 2026-2030",
     order: 5,
     
