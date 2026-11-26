@@ -19,6 +19,13 @@ const homeSidebarLinks = [
     kind: "project" as const,
   },
   {
+    title: "Authority-Aware AI",
+    href: "/authority-aware-ai",
+    enabled: true,
+    external: false,
+    kind: "project" as const,
+  },
+  {
     title: "Civic Brain",
     href: "https://tbd.knit.nz",
     enabled: false,
@@ -31,6 +38,13 @@ const homeSidebarLinks = [
     enabled: false,
     external: true,
     kind: "project" as const,
+  },
+  {
+    title: "Publications",
+    href: "/publications",
+    enabled: true,
+    external: false,
+    kind: "topLevel" as const,
   },
   {
     title: "Our Trust",

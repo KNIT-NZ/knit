@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ArrowUpRight } from "lucide-react";
 import TopBar from "@/components/TopBar";
+import InstitutionalNav from "@/components/InstitutionalNav";
 import ProjectRepoDisclosure from "@/components/ProjectRepoDisclosure";
 import { projectLinks } from "@/content/projects";
 
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
 export default function ProjectsPage() {
   return (
     <>
-      <TopBar topLabel="KNIT" bottomLabel="Projects" />
+      <TopBar topLabel="KNIT" bottomLabel="Projects" rightSlot={<InstitutionalNav active="projects" />} />
 
       <main className="standardPage">
         <div className="standardPageInner">

@@ -27,6 +27,18 @@ export const projectLinks: ProjectLink[] = [
     summaryHint: "Launched April 2026",
   },
   {
+    title: "Authority-Aware AI",
+    href: "/authority-aware-ai",
+    enabled: true,
+    external: false,
+    description: "Open specifications and verification infrastructure for AI systems reasoning over institutional authority.",
+    repo: {
+      owner: "KNIT-NZ",
+      name: "authority-aware-ai",
+    },
+    summaryHint: "Specification published",
+  },
+  {
     title: "Civic Brain",
     href: "https://tbd.knit.nz",
     enabled: false,
